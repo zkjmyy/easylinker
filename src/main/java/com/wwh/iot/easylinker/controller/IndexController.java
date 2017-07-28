@@ -4,12 +4,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Created by Administrator on 2017/7/27.
+ * Created by wwhai on 2017/7/27.
+ */
+
+/**
+ * 首页控制器
  */
 @Controller
 @RequestMapping("/")
 public class IndexController {
-    public  String index(){
+    @RequestMapping("/index")
+    public String index() {
         return "index";
     }
 }
