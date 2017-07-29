@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include/header" class="am-topbar am-topbar-inverse">
 </head>
+
 <body>
-hello
+<!--[if lte IE 9]>
+<script type="application/javascript">
+    alert("请用IE以外的浏览器访问！");
+</script>
+<![endif]-->
+
+<header th:include="include/nav" class="am-topbar am-topbar-inverse"></header>
+<div th:include="index/content"></div>
+<div th:include="include/footer"></div>
 </body>
 </html>

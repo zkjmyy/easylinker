@@ -12,9 +12,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * 启动入口
  */
 @SpringBootApplication
-@EnableWebMvc
 @EnableWebSecurity
 @EnableScheduling
+@EnableWebMvc
 @ServletComponentScan
 public class EasylinkerApplication {
 

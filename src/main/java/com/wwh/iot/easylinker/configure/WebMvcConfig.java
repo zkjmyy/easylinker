@@ -9,6 +9,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 /**
@@ -20,6 +21,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     public void addInterceptors(InterceptorRegistry registry) {
         super.addInterceptors(registry);
     }
+
     @Bean
     public FilterRegistrationBean ApiKeyFilterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean(new ApiACLFilter());
@@ -27,4 +29,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         return registration;
     }
 
+
+    @Override
+    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+    }
 }

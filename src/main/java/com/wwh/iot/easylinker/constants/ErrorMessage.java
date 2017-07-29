@@ -4,6 +4,8 @@ package com.wwh.iot.easylinker.constants;
  * Created by wwhai on 2017/7/27.
  */
 public enum ErrorMessage {
+    EXPIRED("账户已过期!"),
+    CREDIT_FAILED("认证失败!"),
     ACTIVED("已经激活！"),
     ACTIVE_SUCCESS("激活成功！"),
     USER_LOCKED("用户被冻结！"),
