@@ -28,16 +28,17 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse httpServletResponse,
                                         Authentication authentication) throws IOException, ServletException {
+        System.out.println("登陆成功");
         AppUser appUser = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         String loginType = request.getParameter("loginType");
-        if (loginType!=null){
-            request.getSession().setAttribute("loginType",loginType);
-            request.getSession().setAttribute("currentUser",appUser);
+        if (loginType != null) {
+            request.getSession().setAttribute("loginType", loginType);
+            request.getSession().setAttribute("currentUser", appUser);
         }
-        switch (loginType) {
+        switch ((String) request.getSession().getAttribute("loginType")) {
             case "WEB":
-                httpServletResponse.sendRedirect("/index.html");
+                httpServletResponse.sendRedirect("/admin/");
                 break;
             case "API":
                 jsonObject.put("message", ErrorMessage.LOGIN_SUCCESS.toString());
@@ -46,6 +47,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
                 httpServletResponse.getWriter().write(jsonObject.toJSONString());
                 break;
             default:
+                httpServletResponse.sendRedirect("/loginPage");
                 break;
         }
     }

@@ -25,7 +25,7 @@ public class LogOutHandler implements LogoutSuccessHandler {
 
         switch (loginType) {
             case "WEB":
-                httpServletResponse.sendRedirect("/logout.html");
+                httpServletResponse.sendRedirect("/loginPage");
                 break;
             case "API":
                 jsonObject.put("message", ErrorMessage.LOGOUT_SUCCESS.toString());
@@ -33,6 +33,7 @@ public class LogOutHandler implements LogoutSuccessHandler {
                 httpServletResponse.getWriter().write(jsonObject.toJSONString());
                 break;
             default:
+                httpServletResponse.sendRedirect("/loginPage");
                 break;
         }
     }

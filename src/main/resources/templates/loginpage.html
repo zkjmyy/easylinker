@@ -1,52 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:include="include/header">
-</head>
-<style>
-    body {
-        background-image: url("/images/bg.jpg");
-        background-size: 100% 100%;
-    }
-</style>
-<body>
+<head th:include="include/htmlhead">
 
+</head>
+
+<body data-type="login">
+<script src="/assets/js/theme.js"></script>
 <div class="am-g tpl-g">
 
-
-    <div class="am-g">
-        <div class="am-u-sm-3 am-u-lg-centered">
-
-            <div style="width:200px;margin-bottom: 50px;margin-left: auto;margin-right: auto;">
-                <img th:src="@{/images/logo.png}" width="200px"/>
+    <div class="tpl-login">
+        <div class="tpl-login-content">
+            <div style="width: 100%;text-align: center">
+                <img src="/images/logo.png" style="width: 100px;margin-right: auto;margin-left: auto"/>
             </div>
+            <form class="am-form tpl-form-line-form" th:action="@{/user/login}" method="POST">
+                <div class="am-form-group">
+                    <input type="text" class="tpl-form-input" name="loginpara" placeholder="请输入账号"/>
+                </div>
 
-            <form class="am-form" method="post" th:action="@{/user/login}">
                 <div class="am-form-group">
-                    <input type="text" id="loginpara" placeholder="请输入账号" name="loginpara"
-                           required="required"/>
+                    <input type="password" class="tpl-form-input" name="password" placeholder="请输入密码"/>
                 </div>
-                <div class="am-form-group">
-                    <input type="hidden" name="loginType" th:value="WEB"/>
-                    <input type="password" id="user-name" placeholder="请输入密码" name="password"
-                           required="required"/>
-                </div>
-                <div class="am-form-group">
+                <div class="am-form-group tpl-login-remember-me">
                     <input id="remember-me" type="checkbox"/>
+                    <input type="hidden"  name="loginType" value="WEB" />
                     <label for="remember-me">
                         记住密码
                     </label>
                 </div>
                 <div class="am-form-group">
                     <button type="submit"
-                            class="am-btn am-btn-primary  am-btn-block">登录
+                            class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">提交
                     </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<div th:include="include/footer"></div>
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/app.js"></script>
+
 </body>
 
 </html>

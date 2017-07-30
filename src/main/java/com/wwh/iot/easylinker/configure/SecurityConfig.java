@@ -24,14 +24,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     AppUserDetailService appUserDetailService;
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/user/login/", "/logOut", "/v2/api-docs", "/loginPage", "/static/**", "/js/**", "/css/**", "/images/**", "/assets/**");
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers( "/user/login", "/v2/api-docs", "/loginPage","/static/**", "/js/**", "/css/**","/images/**","/index").permitAll();
+        http.authorizeRequests().antMatchers(  "/index").permitAll();
         http.authorizeRequests().anyRequest().authenticated()
                 .and().formLogin().loginPage("/user/login")
-                .successHandler(new LoginSuccessHandler()).failureHandler(new LoginFailedHandler())
-                .failureForwardUrl("/loginfailed.html")
+                .successHandler(new LoginSuccessHandler())
+                .failureHandler(new LoginFailedHandler())
                 .usernameParameter("loginpara").passwordParameter("password")
-                .and().logout().logoutSuccessHandler(new LogOutHandler()).permitAll()
+                .and().logout()
+                .logoutUrl("/logout").logoutSuccessHandler(new LogOutHandler())
+                .permitAll()
                 .and().rememberMe()
                 .and().exceptionHandling()
                 .authenticationEntryPoint(new DefaultAuthenticationEntry())
@@ -48,7 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(appUserDetailService);
     }
-
 
     /**
      * 自定义UserDetailsService，从数据库中读取用户信息

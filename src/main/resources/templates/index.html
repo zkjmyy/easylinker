@@ -1,8 +1,70 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="include/header" class="am-topbar am-topbar-inverse">
-</head>
 
+</head>
+<style>
+    .get {
+
+        width: auto;
+        text-align: center;
+        padding: 100px 0;
+    }
+    .get-title {
+        font-size: 300%;
+        border: 2px solid #fff;
+        padding: 20px;
+        color: #0f9ae0;
+        display: inline-block;
+    }
+
+    .get-btn {
+        background: #fff;
+    }
+
+    .detail {
+        background: #fff;
+    }
+
+    .detail-h2 {
+        text-align: center;
+        font-size: 150%;
+        margin: 40px 0;
+    }
+
+    .detail-h3 {
+        color: #1f8dd6;
+    }
+
+    .detail-p {
+        color: #7f8c8d;
+    }
+
+    .detail-mb {
+        margin-bottom: 30px;
+    }
+    .about {
+        background: #fff;
+        padding: 40px 0;
+        color: #7f8c8d;
+    }
+    .about-color {
+        color: #34495e;
+    }
+    .about-title {
+        font-size: 180%;
+        padding: 30px 0 50px 0;
+        text-align: center;
+    }
+
+    .footer p {
+        color: #7f8c8d;
+        margin: 0;
+        padding: 15px 0;
+        text-align: center;
+        background: #2d3e50;
+    }
+</style>
 <body>
 <!--[if lte IE 9]>
 <script type="application/javascript">
@@ -10,8 +72,145 @@
 </script>
 <![endif]-->
 
-<header th:include="include/nav" class="am-topbar am-topbar-inverse"></header>
-<div th:include="index/content"></div>
-<div th:include="include/footer"></div>
+<header class="am-topbar am-topbar-fixed-top">
+    <div class="am-container">
+        <h1 class="am-topbar-brand">
+            <a href="#">EasyLinker</a>
+        </h1>
+
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only"
+                data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span> <span
+                class="am-icon-bars"></span></button>
+
+        <div class="am-collapse am-topbar-collapse" id="collapse-head">
+            <ul class="am-nav am-nav-pills am-topbar-nav">
+                <li class="am-active"><a href="#">首页</a></li>
+            </ul>
+            <div class="am-topbar-right">
+                <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册
+                </button>
+            </div>
+            <div class="am-topbar-right">
+                <a th:href="@{/loginPage}" class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="get">
+    <div class="am-g">
+        <div class="am-u-lg-12">
+            <h1 class="get-title">EasyLinker--让设备联网更容易</h1>
+
+            <p>
+                物联网硬件工程师和极客玩家的选择
+            </p>
+
+        </div>
+    </div>
+</div>
+
+<div class="detail">
+    <div class="am-g am-container">
+        <div class="am-u-lg-12">
+            <h2 class="detail-h2">期待和你一起去实现!</h2>
+            <div class="am-g">
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
+
+                    <h3 class="detail-h3">
+                        <i class="am-icon-mobile am-icon-sm"></i>
+                        树莓派
+                    </h3>
+
+                    <p class="detail-p">
+                       让你的树莓派成为嵌入式控制器。
+                    </p>
+                </div>
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
+                    <h3 class="detail-h3">
+                        <i class="am-icon-cogs am-icon-sm"></i>
+                        Ardiuno
+                    </h3>
+
+                    <p class="detail-p">
+                        用Ardiuno打造一套智能家居
+                    </p>
+                </div>
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
+                    <h3 class="detail-h3">
+                        <i class="am-icon-check-square-o am-icon-sm"></i>
+                        STM智能芯片
+                    </h3>
+
+                    <p class="detail-p">
+                        打造专属于你的智能设备
+                    </p>
+                </div>
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
+                    <h3 class="detail-h3">
+                        <i class="am-icon-send-o am-icon-sm"></i>
+                        单片机
+                    </h3>
+
+                    <p class="detail-p">
+                        单片机接入网络成为现实
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="about">
+    <div class="am-g am-container">
+        <div class="am-u-lg-12">
+            <h2 class="about-title about-color">EasyLinker崇尚开放、自由，非常欢迎大家的参与</h2>
+
+            <div class="am-g">
+                <div class="am-u-lg-6 am-u-md-4 am-u-sm-12">
+                    <form class="am-form">
+                        <label for="name" class="about-color">你的姓名</label>
+                        <input id="name" type="text"/>
+                        <br/>
+                        <label for="email" class="about-color">你的邮箱</label>
+                        <input id="email" type="email"/>
+                        <br/>
+                        <label for="message" class="about-color">你的留言</label>
+                        <textarea id="message"></textarea>
+                        <br/>
+                        <button type="submit" class="am-btn am-btn-primary am-btn-sm"><i class="am-icon-check"></i> 提 交
+                        </button>
+                    </form>
+                    <hr class="am-article-divider am-show-sm-only"/>
+                </div>
+
+                <div class="am-u-lg-6 am-u-md-8 am-u-sm-12">
+                    <h4 class="about-color">关于我们</h4>
+
+                    <p>EasyLinker</p>
+                    <h4 class="about-color">团队介绍</h4>
+                    <p>EasyLinker Team</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>MIT license. by the EasyLinker Team.</p>
+</footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="assets/js/amazeui.min.js"></script>
 </body>
 </html>

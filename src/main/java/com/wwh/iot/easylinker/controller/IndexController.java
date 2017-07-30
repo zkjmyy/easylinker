@@ -13,14 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class IndexController {
-    @RequestMapping("/loginPage")
-    public String loginPage() {
-        return "loginPage";
-    }
 
     @RequestMapping("/index")
     public String index() {
         return "index";
     }
+
+    @RequestMapping("/loginPage")
+    public String loginPage() {
+        return "loginpage";
+    }
+
+    @RequestMapping("/loginFailed")
+    public String loginFailed() {
+        return "loginfailed";
+    }
+
 
 }
