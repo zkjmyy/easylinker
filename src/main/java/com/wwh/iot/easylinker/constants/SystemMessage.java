@@ -3,7 +3,7 @@ package com.wwh.iot.easylinker.constants;
 /**
  * Created by wwhai on 2017/7/27.
  */
-public enum ErrorMessage {
+public enum SystemMessage {
     EXPIRED("账户已过期!"),
     CREDIT_FAILED("认证失败!"),
     ACTIVED("已经激活！"),
@@ -26,7 +26,7 @@ public enum ErrorMessage {
     TOPIC_EXIST("Topic已经存在，请不要重复添加！");
     private String message;
 
-    private ErrorMessage(String message) {
+    private SystemMessage(String message) {
         this.message = message;
     }
 

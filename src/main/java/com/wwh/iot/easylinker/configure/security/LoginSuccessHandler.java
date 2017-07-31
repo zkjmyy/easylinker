@@ -1,10 +1,8 @@
 package com.wwh.iot.easylinker.configure.security;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wwh.iot.easylinker.constants.ErrorMessage;
+import com.wwh.iot.easylinker.constants.SystemMessage;
 import com.wwh.iot.easylinker.entity.AppUser;
-import com.wwh.iot.easylinker.respository.AppUserRespository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -41,7 +39,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
                 httpServletResponse.sendRedirect("/admin/");
                 break;
             case "API":
-                jsonObject.put("message", ErrorMessage.LOGIN_SUCCESS.toString());
+                jsonObject.put("message", SystemMessage.LOGIN_SUCCESS.toString());
                 jsonObject.put("data", appUser);
                 jsonObject.put("state", 1);
                 httpServletResponse.getWriter().write(jsonObject.toJSONString());

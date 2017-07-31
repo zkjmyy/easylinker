@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="include/htmlhead">
+
+</head>
+
+<body data-type="login">
+<script src="/assets/js/theme.js"></script>
+<script>
+
+</script>
+
+<div class="am-g tpl-g">
+
+    <div class="tpl-login">
+
+        <div class="tpl-login-content">
+            <div style="width: 100%;text-align: center">
+                <img src="/images/logo.png"
+                     style="width: 100px;margin-right: auto;margin-left: auto;margin-bottom: 70px"/>
+            </div>
+            <div class="tpl-login-title">注册用户</div>
+            <span class="tpl-login-content-info">
+                  创建一个新的用户-|-或者<span><a th:href="@{/index}">[返回首页]</a></span>
+              </span>
+
+            <form class="am-form tpl-form-line-form">
+                <div class="am-form-group">
+                    <input type="text" class="tpl-form-input" id="email" placeholder="邮箱" required="required"/>
+                </div>
+
+                <div class="am-form-group">
+                    <input type="text" class="tpl-form-input" id="username" placeholder="用户名" required="required"/>
+                </div>
+
+                <div class="am-form-group">
+                    <input type="password" class="tpl-form-input" id="password" placeholder="请输入密码"
+                           required="required"/>
+                </div>
+
+                <div class="am-form-group">
+                    <input type="password" class="tpl-form-input" id="password-retry" placeholder="再次输入密码"
+                           required="required"/>
+                </div>
+
+                <div class="am-form-group">
+
+                    <button type="button" id="submitBtn"
+                            class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn js-modal-open" onclick="retry_password()">提交
+                    </button>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<div class="am-modal am-modal-alert" tabindex="-1" id="password_retry_alert">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">密码输入错误！</div>
+        <div class="am-modal-bd">
+            两次密码输入不一样！
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+        </div>
+    </div>
+</div>
+<script>
+    function retry_password() {
+        var pw1 = document.getElementById("password").value;
+        var pw2 = document.getElementById("password-retry").value;
+        if (pw1 != pw2) {
+            var $modal = $('#password_retry_alert');
+            $modal.siblings('.am-btn').on('click', function(e) {
+                var $target = $(e.target);
+                if (($target).hasClass('js-modal-open')) {
+                    $modal.modal();
+                } else if (($target).hasClass('js-modal-close')) {
+                    $modal.modal('close');
+                } else {
+                    $modal.modal('toggle');
+                }
+            });
+
+        } else {
+            console.log("222222222222222222");
+        }
+    }
+</script>
+<script src="/assets/js/amazeui.min.js"></script>
+<script src="/assets/js/app.js"></script>
+
+</body>
+
+</html>

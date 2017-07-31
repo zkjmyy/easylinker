@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="include/header" class="am-topbar am-topbar-inverse">
+<head th:include="include/htmlhead" class="am-topbar am-topbar-inverse">
 
 </head>
 <style>
     .get {
-
-        width: auto;
+        background: url("/images/index-jm-bg.jpg") no-repeat ;
+        background-size: cover;
         text-align: center;
         padding: 100px 0;
     }
+
     .get-title {
         font-size: 300%;
         border: 2px solid #fff;
         padding: 20px;
-        color: #0f9ae0;
+        color: #FFFFFF;
         display: inline-block;
     }
 
@@ -43,14 +44,17 @@
     .detail-mb {
         margin-bottom: 30px;
     }
+
     .about {
         background: #fff;
         padding: 40px 0;
         color: #7f8c8d;
     }
+
     .about-color {
         color: #34495e;
     }
+
     .about-title {
         font-size: 180%;
         padding: 30px 0 50px 0;
@@ -84,14 +88,16 @@
 
         <div class="am-collapse am-topbar-collapse" id="collapse-head">
             <ul class="am-nav am-nav-pills am-topbar-nav">
-                <li class="am-active"><a href="#">首页</a></li>
+                <li class="am-active"><a href="/index">首页</a></li>
+                <li class=""><a href="/document">文档</a></li>
             </ul>
             <div class="am-topbar-right">
-                <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册
-                </button>
+                <a th:href="@{/signupPage}" class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册
+                </a>
             </div>
             <div class="am-topbar-right">
-                <a th:href="@{/loginPage}" class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录
+                <a th:href="@{/loginPage}" class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span
+                        class="am-icon-user"></span> 登录
                 </a>
             </div>
         </div>
@@ -102,7 +108,6 @@
     <div class="am-g">
         <div class="am-u-lg-12">
             <h1 class="get-title">EasyLinker--让设备联网更容易</h1>
-
             <p>
                 物联网硬件工程师和极客玩家的选择
             </p>
@@ -124,7 +129,7 @@
                     </h3>
 
                     <p class="detail-p">
-                       让你的树莓派成为嵌入式控制器。
+                        让你的树莓派成为嵌入式控制器。
                     </p>
                 </div>
                 <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">

@@ -1,7 +1,7 @@
 package com.wwh.iot.easylinker.configure.security;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wwh.iot.easylinker.constants.ErrorMessage;
+import com.wwh.iot.easylinker.constants.SystemMessage;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
@@ -13,7 +13,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 
 /**
  * Created by Administrator on 2017/7/28.
@@ -36,15 +35,15 @@ public class UserAuthenticationFailureHandler extends SimpleUrlAuthenticationFai
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         if (exception instanceof UsernameNotFoundException){
-            resultJson.put("message", ErrorMessage.NO_ACTIVE.toString());
+            resultJson.put("message", SystemMessage.NO_ACTIVE.toString());
         }else if (exception instanceof UsernameNotFoundException){
-            resultJson.put("message", ErrorMessage.USER_NOT_EXIST.toString());
+            resultJson.put("message", SystemMessage.USER_NOT_EXIST.toString());
         }else if (exception instanceof BadCredentialsException){
-            resultJson.put("message", ErrorMessage.CREDIT_FAILED.toString());
+            resultJson.put("message", SystemMessage.CREDIT_FAILED.toString());
         }else if (exception instanceof LockedException){
-            resultJson.put("message", ErrorMessage.USER_LOCKED.toString());
+            resultJson.put("message", SystemMessage.USER_LOCKED.toString());
         }else if (exception instanceof AccountExpiredException){
-            resultJson.put("message", ErrorMessage.EXPIRED.toString());
+            resultJson.put("message", SystemMessage.EXPIRED.toString());
         }
         System.out.println(exception.getClass().toString());
 

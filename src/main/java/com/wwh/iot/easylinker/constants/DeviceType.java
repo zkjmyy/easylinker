@@ -5,7 +5,10 @@ package com.wwh.iot.easylinker.constants;
  */
 
 /**
- *
+ * 传感器的类型
  */
 public enum DeviceType {
+    TYPE_MEDIA,
+    TYPE_SWITCHER,
+    TYPE_VALUE
 }

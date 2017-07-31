@@ -2,6 +2,7 @@ package com.wwh.iot.easylinker.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by wwhai on 2017/7/30.
@@ -14,26 +15,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
     @RequestMapping("/")
-    public String index(){
+    public String index() {
         return "/admin/index";
     }
 
     @RequestMapping("/devices")
-    public String devices(){
+    public String devices() {
         return "/admin/devices";
     }
 
     @RequestMapping("/addDevice")
-    public String addDevice(){
+    public String addDevice() {
         return "/admin/addDevice";
     }
 
     @RequestMapping("/sysConfig")
-    public String sysConfig(){
+    public String sysConfig() {
         return "/admin/sysConfig";
     }
 
-
+    @RequestMapping("/deviceDetail")
+    public String deviceDetail(@RequestParam String deviceId) {
+        return "/admin/deviceDetail";
+    }
 
 
 }

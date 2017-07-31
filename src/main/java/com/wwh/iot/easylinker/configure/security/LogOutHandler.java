@@ -1,7 +1,7 @@
 package com.wwh.iot.easylinker.configure.security;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wwh.iot.easylinker.constants.ErrorMessage;
+import com.wwh.iot.easylinker.constants.SystemMessage;
 import com.wwh.iot.easylinker.entity.AppUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,7 +28,7 @@ public class LogOutHandler implements LogoutSuccessHandler {
                 httpServletResponse.sendRedirect("/loginPage");
                 break;
             case "API":
-                jsonObject.put("message", ErrorMessage.LOGOUT_SUCCESS.toString());
+                jsonObject.put("message", SystemMessage.LOGOUT_SUCCESS.toString());
                 jsonObject.put("state", 1);
                 httpServletResponse.getWriter().write(jsonObject.toJSONString());
                 break;

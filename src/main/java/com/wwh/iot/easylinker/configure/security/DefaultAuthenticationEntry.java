@@ -1,7 +1,5 @@
 package com.wwh.iot.easylinker.configure.security;
 
-import com.alibaba.fastjson.JSONObject;
-import com.wwh.iot.easylinker.constants.ErrorMessage;
 import org.springframework.security.core.AuthenticationException;
 
 import javax.servlet.ServletException;
@@ -21,7 +19,6 @@ public class DefaultAuthenticationEntry implements org.springframework.security.
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         httpServletResponse.setCharacterEncoding("utf-8");
         httpServletResponse.setContentType("application/json; charset=utf-8");
-        httpServletRequest.getSession().setAttribute("loginfailedMsg", "登录失败");
-        httpServletResponse.sendRedirect("/loginPage");
+        httpServletResponse.sendRedirect("/index");
     }
 }

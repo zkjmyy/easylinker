@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Collection;
+import java.util.Random;
 
 /**
  * Created by wwhai on 2017/7/28.
@@ -21,8 +22,17 @@ public class AppUser extends BaseEntity implements UserDetails{
     private String username;
     private String password;
     private String email;
-    private String avatar;
+    private String avatar= "/avatar/"+new Random().nextInt(11)+".png";
     private String phone;
+    private String ApiKey;
+
+    public String getApiKey() {
+        return ApiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        ApiKey = apiKey;
+    }
 
     public String getUsername() {
         return username;

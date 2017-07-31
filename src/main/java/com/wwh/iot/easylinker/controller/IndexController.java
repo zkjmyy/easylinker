@@ -19,6 +19,11 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping("/signupPage")
+    public String signupPage() {
+        return "admin/signupPage";
+    }
+
     @RequestMapping("/loginPage")
     public String loginPage() {
         return "loginpage";

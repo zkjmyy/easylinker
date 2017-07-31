@@ -1,10 +1,8 @@
 package com.wwh.iot.easylinker.configure.security;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wwh.iot.easylinker.constants.ErrorMessage;
-import com.wwh.iot.easylinker.entity.AppUser;
+import com.wwh.iot.easylinker.constants.SystemMessage;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import javax.servlet.ServletException;
@@ -30,7 +28,7 @@ public class LoginFailedHandler implements AuthenticationFailureHandler {
                 httpServletResponse.sendRedirect("/loginfailed.html");
                 break;
             case "API":
-                jsonObject.put("message", ErrorMessage.LOGIN_FAILED.toString());
+                jsonObject.put("message", SystemMessage.LOGIN_FAILED.toString());
                 jsonObject.put("state", 0);
                 httpServletResponse.getWriter().write(jsonObject.toJSONString());
                 break;
