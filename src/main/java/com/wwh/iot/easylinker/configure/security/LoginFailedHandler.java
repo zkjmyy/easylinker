@@ -25,7 +25,7 @@ public class LoginFailedHandler implements AuthenticationFailureHandler {
 
         switch (loginType) {
             case "WEB":
-                httpServletResponse.sendRedirect("/loginfailed.html");
+                httpServletResponse.sendRedirect("/loginFailed");
                 break;
             case "API":
                 jsonObject.put("message", SystemMessage.LOGIN_FAILED.toString());

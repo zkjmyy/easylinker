@@ -29,10 +29,14 @@ public class IndexController {
         return "loginpage";
     }
 
+    @RequestMapping("/document")
+    public String document() {
+        return "document";
+    }
+
     @RequestMapping("/loginFailed")
     public String loginFailed() {
         return "loginfailed";
     }
-
 
 }

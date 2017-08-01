@@ -1,8 +1,11 @@
 package com.wwh.iot.easylinker.configure;
 
+import com.wwh.iot.easylinker.configure.activemq.ActiveMQMessageListener;
+import com.wwh.iot.easylinker.configure.activemq.ActiveMqTransportListener;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
+import org.apache.activemq.transport.TransportListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,8 +26,18 @@ public class ActiveMQConfig {
     @Bean
     public ActiveMQConnectionFactory activeMQConnectionFactory() {
         ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory("admin", "password",
-                "tcp://127.0.0.1:61613");
+                "tcp://192.168.199.197:61616");
+        //activeMQConnectionFactory.setTransportListener(new ActiveMqTransportListener());
         return activeMQConnectionFactory;
+    }
+    @Bean
+    public TransportListener addActiveMqTransportListener() {
+        return new ActiveMqTransportListener();
+
+    }
+    @Bean
+    public ActiveMQMessageListener addActiveMQMessageListener(){
+        return new ActiveMQMessageListener();
     }
 
 }

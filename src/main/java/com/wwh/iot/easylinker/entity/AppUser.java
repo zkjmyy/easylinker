@@ -3,9 +3,9 @@ package com.wwh.iot.easylinker.entity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -25,6 +25,16 @@ public class AppUser extends BaseEntity implements UserDetails{
     private String avatar= "/avatar/"+new Random().nextInt(11)+".png";
     private String phone;
     private String ApiKey;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "appUser")
+    private List<Device>devices;
+
+    public List<Device> getDevices() {
+        return devices;
+    }
+
+    public void setDevices(List<Device> devices) {
+        this.devices = devices;
+    }
 
     public String getApiKey() {
         return ApiKey;

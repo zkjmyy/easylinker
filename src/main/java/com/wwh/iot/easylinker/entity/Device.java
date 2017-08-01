@@ -2,9 +2,7 @@ package com.wwh.iot.easylinker.entity;
 
 import com.wwh.iot.easylinker.constants.DeviceType;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import java.util.UUID;
 
 /**
@@ -15,13 +13,16 @@ import java.util.UUID;
  * 设备
  */
 @Entity
+
 public class Device extends BaseEntity {
     private String name;
     @Enumerated(EnumType.STRING)
     private DeviceType type;
     private String serialNumber = UUID.randomUUID().toString();
     private String deviceDescribe;
-    private String userId;
+    @ManyToOne(cascade = CascadeType.ALL,optional = true)
+    //@JoinColumn(name = "id")
+    private AppUser appUser;
 
     public String getName() {
         return name;
@@ -55,11 +56,11 @@ public class Device extends BaseEntity {
         this.deviceDescribe = deviceDescribe;
     }
 
-    public String getUserId() {
-        return userId;
+    public AppUser getAppUser() {
+        return appUser;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 }
