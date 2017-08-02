@@ -1,27 +1,27 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:include="include/htmlhead">
+<head th:include="/include/htmlhead">
 </head>
 
 <body data-type="index">
 <script src="/assets/js/theme.js"></script>
 <div class="am-g tpl-g">
     <!-- 头部 -->
-    <header th:include="include/nav">
+    <header th:include="/include/nav">
     </header>
     <!-- 侧边导航栏 -->
     <div class="left-sidebar">
         <!-- 用户信息 -->
-        <div class="tpl-sidebar-user-panel" th:include="admin/common/userInfo"></div>
-        <div th:include="admin/common/sidebar"></div>
+        <div class="tpl-sidebar-user-panel" th:include="/admin/common/userInfo"></div>
+        <div th:include="/admin/common/sidebar"></div>
     </div>
 
 </div>
 
 
 <!-- 内容区域 -->
-<div class="tpl-content-wrapper" th:include="admin/index/content">
+<div class="tpl-content-wrapper" th:include="/admin/index/content">
 
 </div>
 <script src="/assets/js/amazeui.min.js"></script>

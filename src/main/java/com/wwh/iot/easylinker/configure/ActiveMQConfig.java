@@ -27,16 +27,19 @@ public class ActiveMQConfig {
     public ActiveMQConnectionFactory activeMQConnectionFactory() {
         ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory("admin", "password",
                 "tcp://192.168.199.197:61616");
-        //activeMQConnectionFactory.setTransportListener(new ActiveMqTransportListener());
-        return activeMQConnectionFactory;
+        activeMQConnectionFactory.setTransportListener(addActiveMqTransportListener());
+         return activeMQConnectionFactory;
     }
+
+
     @Bean
     public TransportListener addActiveMqTransportListener() {
         return new ActiveMqTransportListener();
 
     }
+
     @Bean
-    public ActiveMQMessageListener addActiveMQMessageListener(){
+    public ActiveMQMessageListener addActiveMQMessageListener() {
         return new ActiveMQMessageListener();
     }
 

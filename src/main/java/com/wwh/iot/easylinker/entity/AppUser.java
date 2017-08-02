@@ -1,12 +1,11 @@
 package com.wwh.iot.easylinker.entity;
 
+import com.wwh.iot.easylinker.utils.MD5;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by wwhai on 2017/7/28.
@@ -24,7 +23,7 @@ public class AppUser extends BaseEntity implements UserDetails{
     private String email;
     private String avatar= "/avatar/"+new Random().nextInt(11)+".png";
     private String phone;
-    private String ApiKey;
+    private String ApiKey= MD5.EncodingMD5(UUID.randomUUID().toString());
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "appUser")
     private List<Device>devices;
 

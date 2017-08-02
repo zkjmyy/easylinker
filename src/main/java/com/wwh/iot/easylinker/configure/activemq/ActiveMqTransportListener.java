@@ -14,7 +14,7 @@ public class ActiveMqTransportListener implements TransportListener {
 
     @Override
     public void onCommand(Object o) {
-        logger.info("onCommand"+o.getClass());
+        //logger.info("onCommand");
     }
 
     @Override

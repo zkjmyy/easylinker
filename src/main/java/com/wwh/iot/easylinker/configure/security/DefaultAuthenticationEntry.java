@@ -19,6 +19,6 @@ public class DefaultAuthenticationEntry implements org.springframework.security.
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         httpServletResponse.setCharacterEncoding("utf-8");
         httpServletResponse.setContentType("application/json; charset=utf-8");
-        httpServletResponse.sendRedirect("/loginPage");
+        httpServletResponse.sendRedirect("/index");
     }
 }

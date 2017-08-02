@@ -19,7 +19,6 @@ public class LogOutHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse httpServletResponse, Authentication arg2)
             throws IOException, ServletException {
-        AppUser appUser = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String loginType = (String) request.getSession().getAttribute("loginType");
         JSONObject jsonObject = new JSONObject();
 

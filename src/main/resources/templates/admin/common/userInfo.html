@@ -1,15 +1,45 @@
-<div class="tpl-user-panel-slide-toggleable">
+<div class="tpl-user-panel-slide-toggleable" style="padding-left: 20px">
     <div class="tpl-user-panel-profile-picture">
-        <img src="/assets/img/user04.png" alt=""/>
-    </div>
-    <span class="user-panel-logged-in-text">
-        <ul>
+        <img th:attr="src=${session.currentUser.avatar}" alt=""/>
 
-            <li th:text="'用户名：' + ${ session.currentUser.username}"></li>
-            <li th:text="'APIKey：' + ${ session.currentUser.apiKey}"></li>
-            <li th:text="'Email：' + ${ session.currentUser.email}"></li>
-            <li th:text="'Phone：' + ${ session.currentUser.phone}"></li>
+    </div>
+    <script th:inline="javascript">
+        $(function () {
+            /*<![CDATA[*/
+            var key = [[${session.currentUser.apiKey}]];
+            /*]]>*/
+            $('#my-popover').popover({
+                content: key
+            })
+        });
+    </script>
+
+    <div style="color: #FFFFFF">
+        <ul>
+            <span class="am-badge am-badge-secondary">用户名：</span><li class="am-badge am-badge-primary" th:text="${ session.currentUser.username}"></li><br/>
+            <span class="am-badge am-badge-secondary">Email：</span><li class="am-badge am-badge-primary" th:text="${ session.currentUser.email}"></li><br/>
+            <span class="am-badge am-badge-secondary">Phone：</span><li class="am-badge am-badge-primary" th:text="${ session.currentUser.phone}"></li><br/>
+            <a class="am-badge am-badge-warning" href="/user/updatePage">修改资料</a>
         </ul>
-          </span>
-    <a href="javascript:;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
+    </div>
+    <div style="color: #FFFFFF;margin-top: 30px">
+        <button class="am-btn am-btn-danger" id="my-popover">查看APIKEY</button>
+    </div>
+
 </div>
+
+<script>
+    $(function () {
+        $('#doc-prompt-toggle').on('click', function () {
+            $('#my-prompt').modal({
+                relatedTarget: this,
+                onConfirm: function (e) {
+                    alert('你输入的是：' + e.data || '')
+                },
+                onCancel: function (e) {
+                    alert('不想说!');
+                }
+            });
+        });
+    });
+</script>

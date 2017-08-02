@@ -25,17 +25,24 @@
                   创建一个新的用户-|-或者<span><a th:href="@{/index}">[返回首页]</a></span>
               </span>
 
-            <form class="am-form tpl-form-line-form">
+            <form class="am-form tpl-form-line-form" action="/user/signup" method="post" id="signup">
                 <div class="am-form-group">
-                    <input type="text" class="tpl-form-input" id="email" placeholder="邮箱" required="required"/>
+                    <input type="text" class="tpl-form-input" id="username" name="username" placeholder="用户名"
+                           required="required"/>
                 </div>
 
                 <div class="am-form-group">
-                    <input type="text" class="tpl-form-input" id="username" placeholder="用户名" required="required"/>
+                    <input type="text" class="tpl-form-input" id="phone" name="phone" placeholder="电话"
+                           required="required"/>
                 </div>
 
                 <div class="am-form-group">
-                    <input type="password" class="tpl-form-input" id="password" placeholder="请输入密码"
+                    <input type="text" class="tpl-form-input" name="email" id="email" placeholder="邮箱"
+                           required="required"/>
+                </div>
+
+                <div class="am-form-group">
+                    <input type="password" class="tpl-form-input" name="password" id="password" placeholder="密码"
                            required="required"/>
                 </div>
 
@@ -43,11 +50,10 @@
                     <input type="password" class="tpl-form-input" id="password-retry" placeholder="再次输入密码"
                            required="required"/>
                 </div>
-
                 <div class="am-form-group">
-
                     <button type="button" id="submitBtn"
-                            class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn js-modal-open" onclick="retry_password()">提交
+                            class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn js-modal-open"
+                            onclick="retry_password()">提交
                     </button>
 
                 </div>
@@ -73,20 +79,9 @@
         var pw1 = document.getElementById("password").value;
         var pw2 = document.getElementById("password-retry").value;
         if (pw1 != pw2) {
-            var $modal = $('#password_retry_alert');
-            $modal.siblings('.am-btn').on('click', function(e) {
-                var $target = $(e.target);
-                if (($target).hasClass('js-modal-open')) {
-                    $modal.modal();
-                } else if (($target).hasClass('js-modal-close')) {
-                    $modal.modal('close');
-                } else {
-                    $modal.modal('toggle');
-                }
-            });
-
+            alert("两次密码不一样！");
         } else {
-            console.log("222222222222222222");
+            document.getElementById("signup").submit();
         }
     }
 </script>
