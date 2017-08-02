@@ -55,7 +55,7 @@ public class AdminController {
         device.setDeviceDescribe(describe);
         device.setType(type);
         deviceRespository.save(device);
-        model.addAttribute("message","alert(\"设备增加成功\");"+ SystemMessage.OPERATE_SUCCESS.toString());
+        model.addAttribute("message", SystemMessage.OPERATE_SUCCESS.toString());
         return "/admin/addDevice";
     }
 

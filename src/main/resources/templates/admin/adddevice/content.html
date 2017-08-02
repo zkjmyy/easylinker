@@ -3,9 +3,8 @@
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
             <div class="widget am-cf">
                 <div class="widget-head am-cf">
-                    <div class="widget-title am-fl">增加设备</div>
+                    <div class="widget-title am-fl" th:text="${message}">增加设备</div>
                 </div>
-                <script th:text="${message}"></script>
                 <div class="widget-body am-fr">
                     <form class="am-form tpl-form-line-form" method="post" action="/admin/add">
                         <div class="am-form-group">
