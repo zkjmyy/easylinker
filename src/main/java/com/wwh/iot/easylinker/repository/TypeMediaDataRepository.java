@@ -1,4 +1,4 @@
-package com.wwh.iot.easylinker.respository;
+package com.wwh.iot.easylinker.repository;
 
 import com.wwh.iot.easylinker.entity.data.TypeMediaData;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Created by wwhai on 2017/8/1.
  */
-public interface TypeMediaDataRespository extends JpaRepository<TypeMediaData,String> {
+public interface TypeMediaDataRepository extends JpaRepository<TypeMediaData,String> {
 }

@@ -2,7 +2,7 @@ package com.wwh.iot.easylinker.service;
 
 import com.wwh.iot.easylinker.constants.SystemMessage;
 import com.wwh.iot.easylinker.entity.AppUser;
-import com.wwh.iot.easylinker.respository.AppUserRespository;
+import com.wwh.iot.easylinker.repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.LockedException;
@@ -19,14 +19,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public class AppUserDetailService implements UserDetailsService {
     @Autowired
-    AppUserRespository appUserRespository;
+    AppUserRepository appUserRepository;
 
     @Override
     public UserDetails loadUserByUsername(String parame) throws UsernameNotFoundException {
         /**
          * 可以用Username Or Email Or Phone 登录
          */
-        AppUser appUser = appUserRespository.findTop1ByUsernameOrEmailOrPhone(parame, parame, parame);
+        AppUser appUser = appUserRepository.findTop1ByUsernameOrEmailOrPhone(parame, parame, parame);
         if (appUser == null) {
             throw new UsernameNotFoundException(SystemMessage.USER_NOT_EXIST.toString());
         } else if (!appUser.isEnabled()) {

@@ -18,41 +18,47 @@
                     </div>
 
                     <div class="am-u-sm-12">
-                        <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black "
+                        <table width="100%" class="am-table am-table-compact am-table-bordered tpl-table-black "
                                id="example-r">
                             <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>名称</th>
                                 <th>状态</th>
                                 <th>备注</th>
-                                <th>ID</th>
+                                <th>类型</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody th:each="device:${devicePage.content}">
 
                             <tr class="gradeX">
-                                <td>客厅的温度传感器</td>
-                                <td>运行</td>
-                                <td>客厅的温度传感器</td>
-                                <td>12323432ewr</td>
+
+                                <td th:text="${device.id}"></td>
+                                <td th:text="${device.name}"></td>
+                                <td th:text="${device.isOnline}"></td>
+
+                                <td th:text="${device.deviceDescribe}">客厅的温度传感器</td>
+                                <td th:text="${device.type}"></td>
                                 <td>
                                     <div class="tpl-table-black-operation">
-                                        <a href="javascript:;">
-                                            <i class="am-icon-pencil"></i> 编辑
-                                        </a>
-                                        <a href="javascript:;" class="tpl-table-black-operation-del">
-                                            <i class="am-icon-trash"></i> 详情
-                                        </a>
-                                        <a href="javascript:;" class="tpl-table-black-operation-del">
-                                            <i class="am-icon-trash"></i> 删除
-                                        </a>
+
+                                        <a type="button" th:href="|/admin/deviceDetail?deviceId=${device.id}|" class="am-btn am-btn-secondary">数据</a>
+                                        <a type="button" href="/admin/addDevice" class="am-btn am-btn-success">编辑</a>
+                                        <a type="button" href="/admin/deleteDevice" class="am-btn am-btn-warning">删除</a>
 
                                     </div>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
+                        <div>
+                            <ul class="am-pagination">
+                                <li><a href=""><span class="am-icon-angle-double-left">上一页</span></a></li>
+                                <li><span>当前：12页</span></li>
+                                <li><a href=""><span class="am-icon-angle-double-right">下一页</span></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
