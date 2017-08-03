@@ -54,9 +54,8 @@
                         </table>
                         <div>
                             <ul class="am-pagination">
-                                <li><a href=""><span class="am-icon-angle-double-left">上一页</span></a></li>
-                                <li><span>当前：12页</span></li>
-                                <li><a href=""><span class="am-icon-angle-double-right">下一页</span></a></li>
+                                <li th:if="${devicePage.number}==${devicePage.TotalPages}">上一页</li>
+                                <li th:if="${devicePage.number} le ${devicePage.TotalPages}">下一页</li>
                             </ul>
                         </div>
                     </div>

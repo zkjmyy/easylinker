@@ -23,20 +23,18 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    JSONObject resultJson = new JSONObject();
 
     @Autowired
     AppUserRepository appUserRepository;
 
     @PostMapping("/signup")
-    public String signup(HttpServletRequest httpServletRequest, @RequestParam String username, @RequestParam String email, @RequestParam String phone, @RequestParam String password) {
+    public String signup( @RequestParam String username, @RequestParam String email, @RequestParam String phone, @RequestParam String password) {
         AppUser appUser = new AppUser();
         appUser.setUsername(username);
         appUser.setEmail(email);
         appUser.setPhone(phone);
         appUser.setPassword(password);
         appUserRepository.save(appUser);
-        httpServletRequest.getSession().setAttribute("message", SystemMessage.REGISTER_SUCCESS.toString());
         return "redirect:/loginPage";
     }
 

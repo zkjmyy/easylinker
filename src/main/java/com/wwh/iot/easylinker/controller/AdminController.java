@@ -1,24 +1,26 @@
 package com.wwh.iot.easylinker.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.wwh.iot.easylinker.configure.activemq.ActiveMQMessageProducer;
 import com.wwh.iot.easylinker.constants.DeviceType;
 import com.wwh.iot.easylinker.constants.SystemMessage;
 import com.wwh.iot.easylinker.entity.AppUser;
 import com.wwh.iot.easylinker.entity.Device;
+import com.wwh.iot.easylinker.repository.AppUserRepository;
 import com.wwh.iot.easylinker.repository.DeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 /**
  * Created by wwhai on 2017/7/30.
@@ -29,9 +31,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/admin")
+@Transactional
 public class AdminController {
     @Autowired
     DeviceRepository deviceRepository;
+    @Autowired
+    ActiveMQMessageProducer activeMQMessageProducer;
 
 
     @RequestMapping("/")
@@ -45,12 +50,11 @@ public class AdminController {
         AppUser user = (AppUser) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
-
         Sort sort = new Sort(Sort.Direction.DESC, "id");
-        Pageable pageable = new PageRequest(page, size, sort);
-        //Page<Device>devicePage=deviceRepository.findAll()
-        Page<Device>devicePage= deviceRepository.findByAppUser(user,new PageRequest(page, size, sort));
-        model.put("devicePage",devicePage);
+
+        Page<Device> devicePage = deviceRepository.findByAppUser(user, new PageRequest(page, size, sort));
+        System.out.println(devicePage.getNumberOfElements());
+        model.put("devicePage", devicePage);
         return "/admin/devices";
     }
 
@@ -61,7 +65,7 @@ public class AdminController {
     }
 
     @RequestMapping("/add")
-    public String add(RedirectAttributes redirectAttributes, HttpServletRequest httpServletRequest, @RequestParam String name, @RequestParam DeviceType type, @RequestParam String describe) {
+    public String add(RedirectAttributes redirectAttributes, @RequestParam String name, @RequestParam DeviceType type, @RequestParam String describe) {
         AppUser user = (AppUser) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
@@ -77,8 +81,6 @@ public class AdminController {
     }
 
 
-
-
     @RequestMapping("/sysConfig")
     public String sysConfig() {
         return "/admin/sysConfig";
@@ -89,10 +91,21 @@ public class AdminController {
         return "/admin/sysConfig";
     }
 
+
     @RequestMapping("/deviceDetail")
-    public String deviceDetail(RedirectAttributes redirectAttributes,@RequestParam String deviceId) {
-        redirectAttributes.addFlashAttribute("device",deviceRepository.findOne(deviceId));
-        return "redirect:/admin/deviceDetail";
+    public String deviceDetail( ModelMap modelMap, @RequestParam String deviceId) {
+        modelMap.put("device", deviceRepository.findOne(deviceId));
+        return "/admin/deviceDetail";
+    }
+
+
+    @RequestMapping("/pushMessage")
+    public JSONObject pushMessage( @RequestParam String deviceId,@RequestParam DeviceType deviceType, @RequestParam String message) {
+        activeMQMessageProducer.pushMessage(deviceId,deviceType,message);
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("state",1);
+        jsonObject.put("message",SystemMessage.OPERATE_SUCCESS.toString());
+        return  jsonObject;
     }
 
 

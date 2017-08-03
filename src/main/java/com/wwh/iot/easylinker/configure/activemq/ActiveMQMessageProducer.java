@@ -1,5 +1,6 @@
 package com.wwh.iot.easylinker.configure.activemq;
 
+import com.wwh.iot.easylinker.constants.DeviceType;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
@@ -22,6 +23,10 @@ public class ActiveMQMessageProducer {
 
     @Scheduled(fixedDelay = 3000)//每3s执行1次
     public void send() {
-        this.jmsTemplate.convertAndSend(new ActiveMQTopic("SENSOR"), "来自Springboot");
+        this.jmsTemplate.convertAndSend(new ActiveMQTopic("TYPE_MEDIA"), "来自Springboot");
+    }
+    public void pushMessage(String deviceId, DeviceType deviceType,String message) {
+
+        this.jmsTemplate.convertAndSend(new ActiveMQTopic(deviceType.toString()+"."+deviceId), message);
     }
 }

@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class IndexController {
+    @RequestMapping("/")
+    public String defaultPage() {
+        return "index";
+    }
 
     @RequestMapping("/index")
     public String index() {

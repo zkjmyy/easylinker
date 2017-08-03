@@ -1,5 +1,5 @@
-<div class="tpl-user-panel-slide-toggleable" style="padding-left: 20px">
-    <div class="tpl-user-panel-profile-picture">
+<div class="tpl-user-panel-slide-toggleable" style="padding-left: 4px">
+    <div class="tpl-user-panel-profile-picture" style="margin-left: 40px">
         <img th:attr="src=${session.currentUser.avatar}" alt=""/>
 
     </div>
@@ -15,12 +15,30 @@
     </script>
 
     <div style="color: #FFFFFF">
-        <ul>
-            <span class="am-badge am-badge-secondary">用户名：</span><li class="am-badge am-badge-primary" th:text="${ session.currentUser.username}"></li><br/>
-            <span class="am-badge am-badge-secondary">Email：</span><li class="am-badge am-badge-primary" th:text="${ session.currentUser.email}"></li><br/>
-            <span class="am-badge am-badge-secondary">Phone：</span><li class="am-badge am-badge-primary" th:text="${ session.currentUser.phone}"></li><br/>
-            <a class="am-badge am-badge-warning" href="/user/updatePage">修改资料</a>
-        </ul>
+
+        <table class="am-table" style="color: #FFFFFF;text-align: center;border: none">
+            <thead>
+            <tr>
+                <td>项目</td>
+                <td>属性</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td >用户</td>
+                <td th:text="${ session.currentUser.username}"></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td th:text="${ session.currentUser.email}"></td>
+            </tr>
+            <tr>
+                <td>电话:</td>
+                <td th:text="${ session.currentUser.phone}"></td>
+            </tr>
+
+            </tbody>
+        </table>
     </div>
     <div style="color: #FFFFFF;margin-top: 30px">
         <button class="am-btn am-btn-danger" id="my-popover">查看APIKEY</button>
