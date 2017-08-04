@@ -1,6 +1,7 @@
 package com.wwh.iot.easylinker.configure;
 
 import com.wwh.iot.easylinker.configure.activemq.ActiveMQMessageListener;
+import com.wwh.iot.easylinker.configure.activemq.ActiveMQMessageListenerContainer;
 import com.wwh.iot.easylinker.configure.activemq.ActiveMqTransportListener;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
@@ -8,6 +9,7 @@ import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.activemq.transport.TransportListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jms.listener.MessageListenerContainer;
 
 import javax.jms.Queue;
 import javax.jms.Topic;
@@ -40,7 +42,13 @@ public class ActiveMQConfig {
 
     @Bean
     public ActiveMQMessageListener addActiveMQMessageListener() {
+
         return new ActiveMQMessageListener();
+    }
+
+    @Bean
+    public MessageListenerContainer addActiveMQMessageListenerContainer(){
+        return new ActiveMQMessageListenerContainer(activeMQConnectionFactory());
     }
 
 }

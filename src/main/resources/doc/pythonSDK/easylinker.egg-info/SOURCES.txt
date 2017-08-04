@@ -1,0 +1,7 @@
+setup.py
+easylinker/__init__.py
+easylinker/easylinker.py
+easylinker.egg-info/PKG-INFO
+easylinker.egg-info/SOURCES.txt
+easylinker.egg-info/dependency_links.txt
+easylinker.egg-info/top_level.txt

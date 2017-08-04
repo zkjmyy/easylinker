@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.transaction.Transactional;
@@ -100,7 +101,8 @@ public class AdminController {
 
 
     @RequestMapping("/pushMessage")
-    public JSONObject pushMessage( @RequestParam String deviceId,@RequestParam DeviceType deviceType, @RequestParam String message) {
+    @ResponseBody
+    public JSONObject pushMessage( @RequestParam String deviceId,@RequestParam DeviceType deviceType, @RequestParam(defaultValue = "default") String message) {
         activeMQMessageProducer.pushMessage(deviceId,deviceType,message);
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("state",1);

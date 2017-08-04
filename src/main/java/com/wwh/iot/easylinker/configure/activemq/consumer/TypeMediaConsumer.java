@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 public class TypeMediaConsumer {
     @JmsListener(destination = "TYPE_MEDIA")
     public void receiveMessage(String text) {
-        System.out.println("收到的报文为:"+text);
+
+        System.out.println("from TYPE_MEDIA message:"+text);
     }
 }

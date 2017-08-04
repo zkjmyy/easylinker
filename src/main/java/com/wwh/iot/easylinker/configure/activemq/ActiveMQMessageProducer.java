@@ -22,11 +22,13 @@ public class ActiveMQMessageProducer {
 
 
     @Scheduled(fixedDelay = 3000)//每3s执行1次
-    public void send() {
-        this.jmsTemplate.convertAndSend(new ActiveMQTopic("TYPE_MEDIA"), "来自Springboot");
+    public void testSend() {
+        this.jmsTemplate.convertAndSend(new ActiveMQTopic("TEST"), "测试消息");
     }
-    public void pushMessage(String deviceId, DeviceType deviceType,String message) {
 
-        this.jmsTemplate.convertAndSend(new ActiveMQTopic(deviceType.toString()+"."+deviceId), message);
+    public void pushMessage(String deviceId, DeviceType deviceType, String message) {
+        System.out.println(deviceType.toString() + "." + deviceId + message);
+
+        this.jmsTemplate.convertAndSend(new ActiveMQTopic(deviceType.toString() + "." + deviceId), message);
     }
 }

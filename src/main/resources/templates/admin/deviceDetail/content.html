@@ -1,20 +1,20 @@
 <div class="widget am-cf">
     <div class="widget-head am-cf">
-        <div class="widget-title am-fl" >设备状态:
-            <span th:if="${device.isOnline}" class="am-badge am-badge-success">
+        <div class="widget-title am-fl">设备状态:
+            <span th:if="${device.isOnline}==true" class="am-badge am-badge-success">
                 在线
             </span>
-            <span th:if="${device.isOnline}" class="am-badge am-badge-danger">
+            <span th:if="${device.isOnline}==false" class="am-badge am-badge-danger">
                 离线
             </span>
         </div>
-
 
         <table class="am-table">
             <thead>
             <tr>
                 <th>ID</th>
                 <th>名称</th>
+                <th>设备类型</th>
                 <th>创建时间</th>
                 <th>数据量</th>
                 <th>备注</th>
@@ -24,6 +24,7 @@
             <tr>
                 <td th:text="${device.id}"></td>
                 <td>树莓派</td>
+                <td th:text="${device.type }"></td>
                 <td>2012-10-01</td>
                 <td>3123</td>
                 <td>温度探测器</td>
@@ -44,26 +45,51 @@
 
             <form class="am-form am-form-horizontal">
                 <div class="am-form-group">
-                    <label for="doc-ipt-3" class="am-u-sm-2 am-form-label" >ID</label>
+                    <label for="doc3" class="am-u-sm-2 am-form-label">ID</label>
                     <div class="am-u-sm-10">
-                        <input type="text" id="doc-ipt-3" placeholder="当前设备ID" th:attr="value=${ session.currentUser.id}"   disabled="disabled"/>
+                        <input type="text" id="deviceId" placeholder="当前设备ID" name="deviceId"
+                               th:attr="value=${ device.id}" disabled="disabled" />
+                        <input type="hidden" id="deviceType" placeholder="当前设备ID" name="deviceType"
+                               th:attr="value=${ device.type}" disabled="disabled" />
                     </div>
                 </div>
                 <div class="am-form-group">
-                    <label for="doc-ipt-3" class="am-u-sm-2 am-form-label">内容</label>
+                    <label for="doc-ipt" class="am-u-sm-2 am-form-label">内容</label>
                     <div class="am-u-sm-10">
-                        <input type="text" id="doc-ipt-3" placeholder="输入你想推送内容"/>
+                        <input type="text" id="message" name="message" placeholder="输入你想推送内容" required="required"/>
                     </div>
                 </div>
 
+
                 <div class="am-form-group">
                     <div class="am-u-sm-10 am-u-sm-offset-2">
-                        <button type="submit" class="am-btn am-btn-default">推送</button>
+                        <button type="button" onclick="push()" class="am-btn am-btn-default">推送</button>
                     </div>
                 </div>
             </form>
         </div>
+    </div>
 
+</div>
+
+<script type="application/javascript">
+    function push() {
+        $.post("/admin/pushMessage", {
+            deviceId: $('#deviceId').val(),
+            deviceType: $('#deviceType').val(),
+            message: $('#message').val()
+        }, function (data, status) {
+            alert("推送成功！" );
+        });
+    }
+
+</script>
+
+<div class="widget am-cf">
+    <div class="widget-head am-cf">
+        <div class="widget-title am-fl">日志:
+
+        </div>
 
     </div>
 </div>
