@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component;
 public class TypeValueConsumer {
     @JmsListener(destination = "TYPE_VALUE")
     public void receiveMessage(String text) {
-        System.out.println("Consumer2收到的报文为:"+text);
+        System.out.println("from TYPE_VALUE message:"+text);
     }
 }

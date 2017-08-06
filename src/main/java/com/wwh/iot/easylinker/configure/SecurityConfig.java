@@ -38,7 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("loginpara").passwordParameter("password")
                 .and().logout()
                 .logoutUrl("/logout")
-                //.logoutSuccessHandler(new LogOutHandler())
                 .logoutSuccessUrl("/index")
                 .permitAll()
                 .and().rememberMe()

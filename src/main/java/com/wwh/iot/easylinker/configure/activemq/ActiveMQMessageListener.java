@@ -1,5 +1,9 @@
 package com.wwh.iot.easylinker.configure.activemq;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -11,17 +15,16 @@ import javax.jms.TextMessage;
 /**
  * Mq消息监听器，传感器消息传入入口
  */
+@Component
 public class ActiveMQMessageListener implements MessageListener {
+    Logger logger = LoggerFactory.getLogger(ActiveMQMessageListener.class);
+
     @Override
     public void onMessage(Message arg0) {
         TextMessage textMessage = (TextMessage) arg0;
-        try {
-            System.out.println("接收到的消息内容是：" + textMessage.getText());
-        } catch (JMSException e) {
-            e.printStackTrace();
-        }
-    }
+        logger.info("onMessage :" + textMessage.toString());
 
+    }
 
 
 }

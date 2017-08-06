@@ -3,12 +3,10 @@ package com.wwh.iot.easylinker.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.wwh.iot.easylinker.constants.SystemMessage;
 import com.wwh.iot.easylinker.entity.AppUser;
-import com.wwh.iot.easylinker.respository.AppUserRespository;
+import com.wwh.iot.easylinker.repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,20 +23,18 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    JSONObject resultJson = new JSONObject();
 
     @Autowired
-    AppUserRespository appUserRespository;
+    AppUserRepository appUserRepository;
 
     @PostMapping("/signup")
-    public String signup(HttpServletRequest httpServletRequest, @RequestParam String username, @RequestParam String email, @RequestParam String phone, @RequestParam String password) {
+    public String signup( @RequestParam String username, @RequestParam String email, @RequestParam String phone, @RequestParam String password) {
         AppUser appUser = new AppUser();
         appUser.setUsername(username);
         appUser.setEmail(email);
         appUser.setPhone(phone);
         appUser.setPassword(password);
-        appUserRespository.save(appUser);
-        httpServletRequest.getSession().setAttribute("message", SystemMessage.REGISTER_SUCCESS.toString());
+        appUserRepository.save(appUser);
         return "redirect:/loginPage";
     }
 
@@ -57,7 +53,7 @@ public class UserController {
         currentUser.setEmail(email);
         currentUser.setPhone(phone);
         currentUser.setPassword(password);
-        appUserRespository.save(currentUser);
+        appUserRepository.save(currentUser);
         return "admin/updatePage";
     }
 }
