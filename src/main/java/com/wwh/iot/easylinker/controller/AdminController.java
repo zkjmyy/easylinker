@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/admin")
 public class AdminController {
     @Autowired
-    DeviceRespository deviceRespository;
+    DeviceRespository deviceRespository;//todo 单词拼错
 
 
     @RequestMapping("/")
