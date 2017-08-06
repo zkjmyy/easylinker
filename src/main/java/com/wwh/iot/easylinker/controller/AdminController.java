@@ -6,11 +6,9 @@ import com.wwh.iot.easylinker.constants.DeviceType;
 import com.wwh.iot.easylinker.constants.SystemMessage;
 import com.wwh.iot.easylinker.entity.AppUser;
 import com.wwh.iot.easylinker.entity.Device;
-import com.wwh.iot.easylinker.repository.AppUserRepository;
 import com.wwh.iot.easylinker.repository.DeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -46,8 +44,11 @@ public class AdminController {
     }
 
     @RequestMapping("/devices")
-    public String devices(ModelMap model, @RequestParam(value = "page", defaultValue = "0") Integer page,
-                          @RequestParam(value = "size", defaultValue = "15") Integer size) {
+    public String devices(
+            ModelMap model,
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "15") Integer size
+    ) {
         AppUser user = (AppUser) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
