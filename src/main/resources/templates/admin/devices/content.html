@@ -1,4 +1,4 @@
-<div class="row-content am-cf">
+<div class="row-content am-cf" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="row">
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
             <div class="widget am-cf">
@@ -32,20 +32,27 @@
                             </thead>
                             <tbody th:each="device:${devicePage.content}">
 
-                            <tr class="gradeX">
+                            <tr class="gradeX" th:switch="${device.type}">
 
                                 <td th:text="${device.id}"></td>
                                 <td th:text="${device.name}"></td>
-                                <td th:text="${device.isOnline}"></td>
+                                <td th:if="${device.isOnline==true}"><span class="am-badge am-badge-success">在线</span>
+                                </td>
+                                <td th:if="${device.isOnline==false}"><span class="am-badge am-badge-danger">离线</span>
+                                </td>
+                                <td th:text="${device.deviceDescribe}"></td>
 
-                                <td th:text="${device.deviceDescribe}">客厅的温度传感器</td>
                                 <td th:text="${device.type}"></td>
                                 <td>
                                     <div class="tpl-table-black-operation">
 
-                                        <a type="button" th:href="|/admin/deviceDetail?deviceId=${device.id}|" class="am-btn am-btn-secondary">数据</a>
-                                        <a type="button" href="/admin/addDevice" class="am-btn am-btn-success">编辑</a>
-                                        <a type="button" href="/admin/deleteDevice" class="am-btn am-btn-warning">删除</a>
+                                        <a type="button" style="color: #FFFFFF"
+                                           th:href="|/admin/deviceDetail?deviceId=${device.id}|"
+                                           class="am-btn am-btn-secondary">数据</a>
+                                        <a type="button" style="color: #FFFFFF" href="/admin/addDevice"
+                                           class="am-btn am-btn-success">编辑</a>
+                                        <a type="button" style="color: #FFFFFF" href="/admin/deleteDevice"
+                                           class="am-btn am-btn-warning">删除</a>
 
                                     </div>
                                 </td>

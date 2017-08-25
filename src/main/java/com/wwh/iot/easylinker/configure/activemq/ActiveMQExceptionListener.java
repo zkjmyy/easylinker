@@ -16,6 +16,6 @@ public class ActiveMQExceptionListener implements ExceptionListener {
 
     @Override
     public void onException( JMSException e ) {
-        logger.info("ActiveMQExceptionListener onException :" + e );
+        logger.info("ActiveMQExceptionListener onException :" + e.getClass() );
     }
 }

@@ -9,6 +9,10 @@ import java.io.IOException;
 /**
  * Created by wwhai on 2017/8/1.
  */
+
+/**
+ * 消息传送监听器
+ */
 public class ActiveMqTransportListener implements TransportListener {
     private Logger logger = LoggerFactory.getLogger(ActiveMqTransportListener.class);
 
@@ -31,4 +35,5 @@ public class ActiveMqTransportListener implements TransportListener {
     public void transportResumed() {
         logger.info("transportResumed");
     }
+
 }

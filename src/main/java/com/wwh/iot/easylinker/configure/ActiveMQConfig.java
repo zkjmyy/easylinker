@@ -7,6 +7,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.activemq.transport.TransportListener;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.listener.MessageListenerContainer;
@@ -25,10 +26,12 @@ public class ActiveMQConfig {
      *
      * @return
      */
+    @Value("${spring.activemq.broker-url}")
+    String url;
     @Bean
     public ActiveMQConnectionFactory activeMQConnectionFactory() {
         ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory("admin", "password",
-                "tcp://192.168.199.197:61616");
+                url);
         activeMQConnectionFactory.setTransportListener(addActiveMqTransportListener());
          return activeMQConnectionFactory;
     }
