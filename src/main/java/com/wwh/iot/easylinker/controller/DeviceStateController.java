@@ -33,16 +33,11 @@ public class DeviceStateController {
             case "ONLINE":
                 device.setIsOnline(true);
                 break;
-            default:
-                resultJson.put("message", SystemMessage.OPERATE_FAILED.toString());
-                resultJson.put("tip","只有ONLINE和OFFLINE两个选项！");
-                resultJson.put("state", 0);
-                return resultJson;
+            default:break;
         }
 
         deviceRepository.save(device);
         resultJson.put("message", SystemMessage.OPERATE_SUCCESS.toString());
-        resultJson.put("data", device);
         resultJson.put("state", 1);
         return resultJson;
     }

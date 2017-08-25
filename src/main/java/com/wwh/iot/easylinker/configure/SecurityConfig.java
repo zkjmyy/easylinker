@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/user/login/", "/logOut", "/v2/api-docs", "/loginPage", "/static/**", "/js/**", "/css/**", "/images/**", "/assets/**");
+        web.ignoring().antMatchers("/user/login/", "/logOut", "/v2/api-docs","/device/*", "/loginPage", "/static/**", "/js/**", "/css/**", "/images/**", "/assets/**");
     }
 
     @Override
