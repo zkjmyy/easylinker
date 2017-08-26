@@ -7,6 +7,7 @@ import com.wwh.iot.easylinker.constants.SystemMessage;
 import com.wwh.iot.easylinker.entity.AppUser;
 import com.wwh.iot.easylinker.entity.Device;
 import com.wwh.iot.easylinker.repository.DeviceRepository;
+import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,7 +37,6 @@ public class AdminController {
     DeviceRepository deviceRepository;
     @Autowired
     ActiveMQMessageProducer activeMQMessageProducer;
-
 
     @RequestMapping("/")
     public String index() {

@@ -4,13 +4,13 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by wwhai on 2017/7/31.
+ * Created by wwhai on 2017/8/26.
  */
-@Component("TypeValueConsumer")
-public class TypeValueConsumer {
-    @JmsListener(destination = "TYPE_VALUE")
-
+@Component
+public class AdviseConsumer {
+    @JmsListener(destination = "ActiveMQ.Advisory.>")
     public void receiveMessage(String text) {
-        System.out.println("from TYPE_VALUE message:"+text);
+
+        System.out.println("Msg:"+text);
     }
 }

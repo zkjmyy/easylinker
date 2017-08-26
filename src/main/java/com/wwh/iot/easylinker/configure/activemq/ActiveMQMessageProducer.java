@@ -23,7 +23,7 @@ public class ActiveMQMessageProducer {
 
     @Scheduled(fixedDelay = 3000)//每3s执行1次
     public void testSend() {
-        this.jmsTemplate.convertAndSend(new ActiveMQTopic("TEST"), "测试消息");
+        this.jmsTemplate.convertAndSend(new ActiveMQTopic("TEST"), "测试消息1");
     }
 
     public void pushMessage(String deviceId, DeviceType deviceType, String message) {
