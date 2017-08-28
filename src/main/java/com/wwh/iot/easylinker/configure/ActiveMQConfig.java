@@ -1,5 +1,6 @@
 package com.wwh.iot.easylinker.configure;
 
+import com.wwh.iot.easylinker.configure.activemq.ActiveMQExceptionListener;
 import com.wwh.iot.easylinker.configure.activemq.ActiveMQMessageListener;
 import com.wwh.iot.easylinker.configure.activemq.ActiveMQMessageListenerContainer;
 import com.wwh.iot.easylinker.configure.activemq.ActiveMqTransportListener;
@@ -29,6 +30,7 @@ public class ActiveMQConfig {
                 url);
         activeMQConnectionFactory.setTransportListener(addActiveMqTransportListener());
         activeMQConnectionFactory.setWatchTopicAdvisories(true);
+        activeMQConnectionFactory.setExceptionListener(addActiveMQExceptionListener());
 
         return activeMQConnectionFactory;
     }
@@ -49,5 +51,11 @@ public class ActiveMQConfig {
     @Bean
     public MessageListenerContainer addActiveMQMessageListenerContainer() throws Exception {
         return new ActiveMQMessageListenerContainer(activeMQConnectionFactory());
+    }
+
+    @Bean
+    public ActiveMQExceptionListener addActiveMQExceptionListener() {
+
+        return new ActiveMQExceptionListener();
     }
 }

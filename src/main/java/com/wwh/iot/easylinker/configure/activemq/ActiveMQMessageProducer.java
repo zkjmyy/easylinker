@@ -19,11 +19,12 @@ public class ActiveMQMessageProducer {
 
     @Autowired
     private JmsTemplate jmsTemplate;
+    ActiveMQTopic activeMQTopic=new ActiveMQTopic("TEST");
 
 
-    @Scheduled(fixedDelay = 3000)//每3s执行1次
+    //@Scheduled(fixedDelay = 3000)//每3s执行1次
     public void testSend() {
-        this.jmsTemplate.convertAndSend(new ActiveMQTopic("TEST"), "测试消息1");
+        this.jmsTemplate.convertAndSend(activeMQTopic, "测试消息");
     }
 
     public void pushMessage(String deviceId, DeviceType deviceType, String message) {

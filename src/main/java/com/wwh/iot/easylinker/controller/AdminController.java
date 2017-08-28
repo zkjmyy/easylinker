@@ -1,6 +1,7 @@
 package com.wwh.iot.easylinker.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wwh.iot.easylinker.apiv1.MessageSender;
 import com.wwh.iot.easylinker.configure.activemq.ActiveMQMessageProducer;
 import com.wwh.iot.easylinker.constants.DeviceType;
 import com.wwh.iot.easylinker.constants.SystemMessage;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.transaction.Transactional;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * Created by wwhai on 2017/7/30.
@@ -39,7 +44,24 @@ public class AdminController {
     ActiveMQMessageProducer activeMQMessageProducer;
 
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model) {
+        Map<String, Object> systemInfo = new HashMap<>();
+        Properties props = System.getProperties();
+        String osName = props.getProperty("os.name");
+        String osArch = props.getProperty("os.arch");
+        String osVersion = props.getProperty("os.version");
+        String totalMemory = Runtime.getRuntime().totalMemory() / 1024 / 1024 + "M";
+        String freeMemory = Runtime.getRuntime().freeMemory() / 1024 / 1024 + "M";
+        String alreadyUse = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024 + "M";
+        systemInfo.put("osName", osName);
+        systemInfo.put("osArch", osArch);
+        systemInfo.put("osVersion", osVersion);
+        systemInfo.put("totalMemory", totalMemory);
+        systemInfo.put("freeMemory", freeMemory);
+        systemInfo.put("alreadyUse", alreadyUse);
+        systemInfo.put("allDevice",deviceRepository.findAll().size());
+        systemInfo.put("onlineDevice",deviceRepository.getOnlineDeviceCount());
+        model.addAttribute("systemInfo",systemInfo);
         return "/admin/index";
     }
 
@@ -104,7 +126,8 @@ public class AdminController {
     @RequestMapping("/pushMessage")
     @ResponseBody
     public JSONObject pushMessage( @RequestParam String deviceId,@RequestParam DeviceType deviceType, @RequestParam(defaultValue = "default") String message) {
-        activeMQMessageProducer.pushMessage(deviceId,deviceType,message);
+        MessageSender.pushMessage(deviceId,deviceType,message);
+        //activeMQMessageProducer.pushMessage(deviceId,deviceType,message);
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("state",1);
         jsonObject.put("message",SystemMessage.OPERATE_SUCCESS.toString());

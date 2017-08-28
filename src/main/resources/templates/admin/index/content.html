@@ -3,39 +3,36 @@
     <div class="am-u-sm-12 am-u-md-6 am-u-lg-4">
         <div class="widget widget-primary am-cf">
             <div class="widget-statistic-header">
+                运行状态
+            </div>
+            <div class="widget-statistic-body">
+                <div class="widget-statistic-value">
+运行中
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="am-u-sm-12 am-u-md-6 am-u-lg-4">
+        <div class="widget widget-primary am-cf">
+            <div class="widget-statistic-header">
                 我的设备量
             </div>
             <div class="widget-statistic-body">
-                <div class="widget-statistic-value">
-                   100
+                <div class="widget-statistic-value" th:text="${systemInfo.allDevice}">
+
                 </div>
 
             </div>
         </div>
     </div>
-
-    <div class="am-u-sm-12 am-u-md-6 am-u-lg-4">
-        <div class="widget widget-purple am-cf">
-            <div class="widget-statistic-header">
-                数据访问量
-            </div>
-            <div class="widget-statistic-body">
-                <div class="widget-statistic-value">
-                    12345
-                </div>
-
-            </div>
-        </div>
-    </div>
-
     <div class="am-u-sm-12 am-u-md-6 am-u-lg-4">
         <div class="widget widget-purple am-cf">
             <div class="widget-statistic-header">
                当前在线
             </div>
             <div class="widget-statistic-body">
-                <div class="widget-statistic-value">
-                    12345
+                <div class="widget-statistic-value" th:text="${systemInfo.onlineDevice}">
                 </div>
 
             </div>
@@ -51,80 +48,17 @@
                     <a href="javascript:;" class="am-icon-cog"></a>
                 </div>
             </div>
+
             <div class="widget-body widget-body-md am-fr">
+                <ul>
+                    <li th:text="|操作系统：${systemInfo.osName}|"></li>
+                    <li th:text="| 操作系统架构：${systemInfo.osArch}|"></li>
+                    <li th:text="|操作系统版本：${systemInfo.osVersion}|"></li>
+                    <li th:text="| 总内存：${systemInfo.totalMemory}|"></li>
+                    <li th:text="|空余内存：${systemInfo.freeMemory}|"></li>
+                    <li th:text="|已用内存：${systemInfo.alreadyUse}|"></li>
+                </ul>
 
-                <div th:text="${systemInfo}">操作系统  </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="am-u-sm-12 am-u-md-4">
-        <div class="widget am-cf ">
-            <div class="widget-head am-cf">
-                <div class="widget-title am-fl">WEB服务器信息</div>
-                <div class="widget-function am-fr">
-                    <a href="javascript:;" class="am-icon-cog"></a>
-                </div>
-            </div>
-            <div class="widget-body widget-body-md am-fr">
-
-                <div class="am-progress-title">CPU Load <span class="am-fr am-progress-title-more">28% / 100%</span>
-                </div>
-                <div class="am-progress">
-                    <div class="am-progress-bar" style="width: 15%"></div>
-                </div>
-                <div class="am-progress-title">CPU Load <span class="am-fr am-progress-title-more">28% / 100%</span>
-                </div>
-                <div class="am-progress">
-                    <div class="am-progress-bar  am-progress-bar-warning" style="width: 75%"></div>
-                </div>
-                <div class="am-progress-title">CPU Load <span class="am-fr am-progress-title-more">28% / 100%</span>
-                </div>
-                <div class="am-progress">
-                    <div class="am-progress-bar am-progress-bar-danger" style="width: 35%"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="am-u-sm-12 am-u-md-4">
-        <div class="widget am-cf">
-            <div class="widget-head am-cf">
-                <div class="widget-title am-fl">数据库服务器信息</div>
-                <div class="widget-function am-fr">
-                    <a href="javascript:;" class="am-icon-cog"></a>
-                </div>
-            </div>
-            <div class="widget-body widget-body-md am-fr">
-
-                <div class="am-progress-title">CPU Load <span class="am-fr am-progress-title-more">28% / 100%</span>
-                </div>
-                <div class="am-progress">
-                    <div class="am-progress-bar" style="width: 15%"></div>
-                </div>
-                <div class="am-progress-title">CPU Load <span class="am-fr am-progress-title-more">28% / 100%</span>
-                </div>
-                <div class="am-progress">
-                    <div class="am-progress-bar  am-progress-bar-warning" style="width: 75%"></div>
-                </div>
-                <div class="am-progress-title">CPU Load <span class="am-fr am-progress-title-more">28% / 100%</span>
-                </div>
-                <div class="am-progress">
-                    <div class="am-progress-bar am-progress-bar-danger" style="width: 35%"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="am-u-sm-12 am-u-md-8">
-        <div class="widget am-cf">
-            <div class="widget-head am-cf">
-                <div class="widget-title am-fl">近期数据量</div>
-                <div class="widget-function am-fr">
-                    <a href="javascript:;" class="am-icon-cog"></a>
-                </div>
             </div>
         </div>
     </div>

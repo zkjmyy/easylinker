@@ -18,11 +18,20 @@ public class Device extends BaseEntity {
     private String name;
     @Enumerated(EnumType.STRING)
     private DeviceType type;
+    private String connectionId="default-connection-id";
     private String serialNumber = UUID.randomUUID().toString();
     private String deviceDescribe;
     @ManyToOne(cascade = CascadeType.ALL,optional = true)
     private AppUser appUser;
     private Boolean isOnline=false;
+
+    public void setConnectionId(String connectionId) {
+        this.connectionId = connectionId;
+    }
+
+    public String getConnectionId() {
+        return connectionId;
+    }
 
     public Boolean getIsOnline() {
         return this.isOnline;

@@ -14,6 +14,7 @@ public class ActiveMQMessageListenerContainer extends SimpleMessageListenerConta
         setConnectionFactory(factory);
         setDestination(new ActiveMQTopic("TEST"));
         setMessageListener(new ActiveMQMessageListener());
+        setPubSubDomain(true);
         setExceptionListener( new ActiveMQExceptionListener() );
     }
 }

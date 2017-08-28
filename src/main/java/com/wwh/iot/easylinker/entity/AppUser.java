@@ -23,7 +23,7 @@ public class AppUser extends BaseEntity implements UserDetails{
     private String email;
     private String avatar= "/avatar/"+new Random().nextInt(11)+".png";
     private String phone;
-    private String ApiKey= MD5.EncodingMD5(UUID.randomUUID().toString());
+    private String apiKey= MD5.EncodingMD5(UUID.randomUUID().toString());
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "appUser")
     private List<Device>devices;
 
@@ -36,11 +36,11 @@ public class AppUser extends BaseEntity implements UserDetails{
     }
 
     public String getApiKey() {
-        return ApiKey;
+        return apiKey;
     }
 
     public void setApiKey(String apiKey) {
-        ApiKey = apiKey;
+        apiKey = apiKey;
     }
 
     public String getUsername() {

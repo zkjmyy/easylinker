@@ -25,12 +25,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/user/login/", "/logOut", "/v2/api-docs","/device/*", "/loginPage", "/static/**", "/js/**", "/css/**", "/images/**", "/assets/**");
+        web.ignoring().antMatchers("/user/login/", "/logOut", "/v2/api-docs", "/loginPage", "/static/**", "/js/**", "/css/**", "/images/**", "/assets/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers(  "/user/signup","/document","/index","/signupPage","/loginFailed").permitAll();
+        http.authorizeRequests().antMatchers(  "/user/signup","/document","/index","/signupPage","/loginFailed","/device/*","/apiv1/*").permitAll();
         http.authorizeRequests().anyRequest().authenticated()
                 .and().formLogin().loginPage("/user/login")
                 .successHandler(new LoginSuccessHandler())
