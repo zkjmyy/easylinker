@@ -32,6 +32,7 @@ public class AdviseConsumer {
 
         if (dataStructure instanceof ConnectionInfo) {
             String connectionId = ((ConnectionInfo) dataStructure).getConnectionId().toString();
+            System.out.println(connectionId);
             Device device=deviceRepository.findOne(((ConnectionInfo) dataStructure).getClientId());
             device.setConnectionId(connectionId);
             device.setIsOnline(true);
