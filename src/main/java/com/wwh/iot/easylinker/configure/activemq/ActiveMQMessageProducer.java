@@ -28,8 +28,6 @@ public class ActiveMQMessageProducer {
     }
 
     public void pushMessage(String deviceId, DeviceType deviceType, String message) {
-        System.out.println(deviceType.toString() + "." + deviceId + message);
-
         this.jmsTemplate.convertAndSend(new ActiveMQTopic(deviceType.toString() + "." + deviceId), message);
     }
 }

@@ -59,9 +59,9 @@ public class AdminController {
         systemInfo.put("totalMemory", totalMemory);
         systemInfo.put("freeMemory", freeMemory);
         systemInfo.put("alreadyUse", alreadyUse);
-        systemInfo.put("allDevice",deviceRepository.findAll().size());
-        systemInfo.put("onlineDevice",deviceRepository.getOnlineDeviceCount());
-        model.addAttribute("systemInfo",systemInfo);
+        systemInfo.put("allDevice", deviceRepository.findAll().size());
+        systemInfo.put("onlineDevice", deviceRepository.getOnlineDeviceCount());
+        model.addAttribute("systemInfo", systemInfo);
         return "/admin/index";
     }
 
@@ -117,7 +117,7 @@ public class AdminController {
 
 
     @RequestMapping("/deviceDetail")
-    public String deviceDetail( ModelMap modelMap, @RequestParam String deviceId) {
+    public String deviceDetail(ModelMap modelMap, @RequestParam String deviceId) {
         modelMap.put("device", deviceRepository.findOne(deviceId));
         return "/admin/deviceDetail";
     }
@@ -125,13 +125,8 @@ public class AdminController {
 
     @RequestMapping("/pushMessage")
     @ResponseBody
-    public JSONObject pushMessage( @RequestParam String deviceId,@RequestParam DeviceType deviceType, @RequestParam(defaultValue = "default") String message) {
-        MessageSender.pushMessage(deviceId,deviceType,message);
-        //activeMQMessageProducer.pushMessage(deviceId,deviceType,message);
-        JSONObject jsonObject=new JSONObject();
-        jsonObject.put("state",1);
-        jsonObject.put("message",SystemMessage.OPERATE_SUCCESS.toString());
-        return  jsonObject;
+    public JSONObject pushMessage(@RequestParam String deviceId, @RequestParam DeviceType deviceType, @RequestParam(defaultValue = "default") String message) {
+        return MessageSender.pushMessage(deviceId, deviceType, message);
     }
 
 

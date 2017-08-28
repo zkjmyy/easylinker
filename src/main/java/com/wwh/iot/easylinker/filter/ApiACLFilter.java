@@ -40,9 +40,11 @@ public class ApiACLFilter implements Filter {
         } else {
             resultJson.put("state",0);
             resultJson.put("message", SystemMessage.REQUIRED_APIKEY.toString());
+            servletResponse.setCharacterEncoding("utf-8");
+            servletResponse.getWriter().write(resultJson.toJSONString());
+            servletResponse.flushBuffer();
         }
-        servletResponse.setCharacterEncoding("utf-8");
-        servletResponse.getWriter().write(resultJson.toJSONString());
+
     }
 
     @Override

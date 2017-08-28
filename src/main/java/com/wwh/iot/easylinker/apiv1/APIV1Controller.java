@@ -21,17 +21,16 @@ public class APIV1Controller {
     ActiveMQMessageProducer activeMQMessageProducer;
 
     @RequestMapping("/test")
-    public String test(){
-        return "ok";
-    }
-    @RequestMapping("/sendMessage")
-    @ResponseBody
-    public JSONObject sendMessage(@RequestParam String deviceId, @RequestParam DeviceType deviceType, @RequestParam(defaultValue = "default") String message) {
-        activeMQMessageProducer.pushMessage(deviceId,deviceType,message);
-        MessageSender.pushMessage(deviceId,deviceType,message);
+    public JSONObject test() {
         JSONObject jsonObject=new JSONObject();
+        jsonObject.put("message","test ok!");
         jsonObject.put("state",1);
-        jsonObject.put("message", SystemMessage.OPERATE_SUCCESS.toString());
-        return  jsonObject;
+        return jsonObject;
+    }
+
+    @RequestMapping("/sendMessage")
+    public JSONObject sendMessage(@RequestParam String deviceId, @RequestParam DeviceType deviceType, @RequestParam(defaultValue = "default") String message) {
+        return MessageSender.pushMessage(deviceId, deviceType, message);
+
     }
 }
