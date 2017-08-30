@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/apiv1")
 @RestController
 public class APIV1Controller {
-    @Autowired
-    ActiveMQMessageProducer activeMQMessageProducer;
+
+    MessageSender messageSender=new MessageSender() ;
 
     @RequestMapping("/test")
     public JSONObject test() {
@@ -30,7 +30,7 @@ public class APIV1Controller {
 
     @RequestMapping("/sendMessage")
     public JSONObject sendMessage(@RequestParam String deviceId, @RequestParam DeviceType deviceType, @RequestParam(defaultValue = "default") String message) {
-        return MessageSender.pushMessage(deviceId, deviceType, message);
+        return messageSender.pushMessage(deviceId, deviceType, message);
 
     }
 }

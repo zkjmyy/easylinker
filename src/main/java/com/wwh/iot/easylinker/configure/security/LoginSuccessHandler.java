@@ -36,7 +36,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         }
         switch ((String) request.getSession().getAttribute("loginType")) {
             case "WEB":
-                httpServletResponse.sendRedirect("/admin/");
+                httpServletResponse.sendRedirect("/admin/index");
                 break;
             case "API":
                 jsonObject.put("message", SystemMessage.LOGIN_SUCCESS.toString());

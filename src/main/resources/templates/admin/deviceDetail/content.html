@@ -48,9 +48,9 @@
                     <label for="doc3" class="am-u-sm-2 am-form-label">ID</label>
                     <div class="am-u-sm-10">
                         <input type="text" id="deviceId" placeholder="当前设备ID" name="deviceId"
-                               th:attr="value=${ device.id}" disabled="disabled" />
+                               th:attr="value=${ device.id}" disabled="disabled"/>
                         <input type="hidden" id="deviceType" placeholder="当前设备ID" name="deviceType"
-                               th:attr="value=${ device.type}" disabled="disabled" />
+                               th:attr="value=${ device.type}" disabled="disabled"/>
                     </div>
                 </div>
                 <div class="am-form-group">
@@ -79,17 +79,37 @@
             deviceType: $('#deviceType').val(),
             message: $('#message').val()
         }, function (data, status) {
-            alert("推送成功！" );
+            console.log($('#deviceId').val())
+            console.log($('#deviceType').val())
+            console.log($('#message').val())
+            alert("推送成功！");
         });
     }
 
 </script>
 
-<div class="widget am-cf">
-    <div class="widget-head am-cf">
-        <div class="widget-title am-fl">日志:
-
-        </div>
-
+<div class="widget am-cf" th:if="${device.type.name() == 'TYPE_SWITCHER'}">
+    <div class=" widget-head am-cf">
+        <div class="widget-title am-fl">TYPE_SWITCHER</div>
     </div>
 </div>
+
+<div class="widget am-cf" th:if="${device.type.name() == 'TYPE_MEDIA'}">
+    <div class="widget-head am-cf">
+        <div class="widget-title am-fl">TYPE_MEDIA</div>
+    </div>
+
+</div>
+
+<div class="widget am-cf" th:if="${device.type.name() == 'TYPE_VALUE'}">
+    <div class="widget-head am-cf">
+        <div class="widget-title am-fl">TYPE_SWITCHER</div>
+    </div>
+    <button type="button" class="am-btn am-btn-secondary">次色按钮</button>
+    <button type="button" class="am-btn am-btn-success">绿色按钮</button>
+</div>
+
+
+
+
+

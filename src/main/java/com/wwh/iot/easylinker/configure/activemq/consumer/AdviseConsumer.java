@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AdviseConsumer {
-    Logger logger= LoggerFactory.getLogger(AdviseConsumer.class);
+    Logger logger = LoggerFactory.getLogger(AdviseConsumer.class);
     @Autowired
     DeviceRepository deviceRepository;
 
@@ -32,21 +32,42 @@ public class AdviseConsumer {
 
         if (dataStructure instanceof ConnectionInfo) {
             String connectionId = ((ConnectionInfo) dataStructure).getConnectionId().toString();
-            System.out.println(connectionId);
-            Device device=deviceRepository.findOne(((ConnectionInfo) dataStructure).getClientId());
-            device.setConnectionId(connectionId);
-            device.setIsOnline(true);
-            deviceRepository.save(device);
-            logger.info("device connected with id:"+connectionId);
-            System.out.println("设备上线:" + connectionId);
+            String clientId = (((ConnectionInfo) dataStructure).getClientId());
+            //clientId :这个其实是设置的设备唯一标识Id
+            if (clientId != null) {
+                Device device = deviceRepository.findOne(clientId);
+                if (device != null) {
+                    device.setConnectionId(connectionId);
+                    device.setIsOnline(true);
+                    deviceRepository.save(device);
+                    logger.info("device connected with id:" + connectionId);
+                } else {
+                    logger.info("device not exist!");
+
+                }
+
+            } else {
+                logger.error("someone want to connect without ID!");
+            }
+
         } else if (dataStructure instanceof RemoveInfo) {
             String objectId = ((RemoveInfo) dataStructure).getObjectId().toString();
-            System.out.println("设备掉线:" + objectId);
-            logger.info("device connected with id:"+objectId);
-            Device device=deviceRepository.findByConnectionId(objectId);
-            device.setIsOnline(false);
-            deviceRepository.save(device);
-        }
-    }
+            if (objectId != null) {
 
+                Device device = deviceRepository.findByConnectionId(objectId);
+                if (device != null) {
+                    device.setIsOnline(false);
+                    deviceRepository.save(device);
+                    logger.info("device disconnected with id:" + objectId);
+                }
+            } else {
+                logger.info("device not exist!");
+            }
+
+        } else {
+            logger.error("someone disconnect without ID!");
+        }
+
+
+    }
 }

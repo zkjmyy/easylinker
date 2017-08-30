@@ -1,9 +1,13 @@
 package com.wwh.iot.easylinker;
 
-import org.springframework.boot.SpringApplication;
+import com.wwh.iot.easylinker.entity.AppUser;
+import com.wwh.iot.easylinker.repository.AppUserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,9 +24,25 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @ServletComponentScan
 @EnableJms
-public class EasylinkerApplication {
+public class EasylinkerApplication implements CommandLineRunner {
+    Logger logger = LoggerFactory.getLogger(EasylinkerApplication.class);
+    @Autowired
+    AppUserRepository appUserRepository;
 
-    public static void main(String[] args) {
-        SpringApplication.run(EasylinkerApplication.class, args);
+    @Override
+
+    public void run(String... strings) throws Exception {
+        if (appUserRepository.findAll().size() == 0) {
+            logger.info("create default user account >>username :username,password :password");
+            logger.info("You can modify you account in manager system");
+            AppUser appUser = new AppUser();
+            appUser.setUsername("username");
+            appUser.setPassword("password");
+            appUser.setEmail("user@user.com");
+            appUserRepository.save(appUser);
+
+        }
     }
+
+
 }

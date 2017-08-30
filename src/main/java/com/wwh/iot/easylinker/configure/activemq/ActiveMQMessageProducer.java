@@ -1,6 +1,8 @@
 package com.wwh.iot.easylinker.configure.activemq;
 
+import com.alibaba.fastjson.JSONObject;
 import com.wwh.iot.easylinker.constants.DeviceType;
+import com.wwh.iot.easylinker.constants.SystemMessage;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
@@ -27,7 +29,11 @@ public class ActiveMQMessageProducer {
         this.jmsTemplate.convertAndSend(activeMQTopic, "测试消息");
     }
 
-    public void pushMessage(String deviceId, DeviceType deviceType, String message) {
+    public JSONObject pushMessage(String deviceId, DeviceType deviceType, String message) {
         this.jmsTemplate.convertAndSend(new ActiveMQTopic(deviceType.toString() + "." + deviceId), message);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("state", 1);
+        jsonObject.put("message", SystemMessage.OPERATE_SUCCESS.toString());
+        return jsonObject;
     }
 }

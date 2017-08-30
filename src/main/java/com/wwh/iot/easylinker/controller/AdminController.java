@@ -36,14 +36,13 @@ import java.util.Properties;
  */
 @Controller
 @RequestMapping("/admin")
-@Transactional
 public class AdminController {
     @Autowired
     DeviceRepository deviceRepository;
     @Autowired
     ActiveMQMessageProducer activeMQMessageProducer;
 
-    @RequestMapping("/")
+    @RequestMapping("/index")
     public String index(Model model) {
         Map<String, Object> systemInfo = new HashMap<>();
         Properties props = System.getProperties();
@@ -62,7 +61,7 @@ public class AdminController {
         systemInfo.put("allDevice", deviceRepository.findAll().size());
         systemInfo.put("onlineDevice", deviceRepository.getOnlineDeviceCount());
         model.addAttribute("systemInfo", systemInfo);
-        return "/admin/index";
+        return "admin/index";
     }
 
     @RequestMapping("/devices")
@@ -79,13 +78,13 @@ public class AdminController {
         Page<Device> devicePage = deviceRepository.findByAppUser(user, new PageRequest(page, size, sort));
         System.out.println(devicePage.getNumberOfElements());
         model.put("devicePage", devicePage);
-        return "/admin/devices";
+        return "admin/devices";
     }
 
 
     @RequestMapping("/addDevice")
     public String addDevice() {
-        return "/admin/addDevice";
+        return "admin/addDevice";
     }
 
     @RequestMapping("/add")
@@ -107,26 +106,26 @@ public class AdminController {
 
     @RequestMapping("/sysConfig")
     public String sysConfig() {
-        return "/admin/sysConfig";
+        return "admin/sysConfig";
     }
 
     @RequestMapping("/config")
     public String config() {
-        return "/admin/sysConfig";
+        return "admin/sysConfig";
     }
 
 
     @RequestMapping("/deviceDetail")
     public String deviceDetail(ModelMap modelMap, @RequestParam String deviceId) {
         modelMap.put("device", deviceRepository.findOne(deviceId));
-        return "/admin/deviceDetail";
+        return "admin/deviceDetail";
     }
 
 
     @RequestMapping("/pushMessage")
     @ResponseBody
     public JSONObject pushMessage(@RequestParam String deviceId, @RequestParam DeviceType deviceType, @RequestParam(defaultValue = "default") String message) {
-        return MessageSender.pushMessage(deviceId, deviceType, message);
+        return activeMQMessageProducer.pushMessage(deviceId, deviceType, message);
     }
 
 
