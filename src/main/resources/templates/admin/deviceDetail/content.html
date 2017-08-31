@@ -79,9 +79,6 @@
             deviceType: $('#deviceType').val(),
             message: $('#message').val()
         }, function (data, status) {
-            console.log($('#deviceId').val())
-            console.log($('#deviceType').val())
-            console.log($('#message').val())
             alert("推送成功！");
         });
     }
@@ -90,23 +87,137 @@
 
 <div class="widget am-cf" th:if="${device.type.name() == 'TYPE_SWITCHER'}">
     <div class=" widget-head am-cf">
-        <div class="widget-title am-fl">TYPE_SWITCHER</div>
+        <div class="widget-title am-fl">状态控制</div>
     </div>
+    <div>
+        <label><input class="mui-switch" type="checkbox"/> 关</label>
+    </div>
+
 </div>
+
 
 <div class="widget am-cf" th:if="${device.type.name() == 'TYPE_MEDIA'}">
     <div class="widget-head am-cf">
         <div class="widget-title am-fl">TYPE_MEDIA</div>
     </div>
 
+
+    <table class="am-table am-table-bordered am-table-striped am-table-compact">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>值</th>
+            <th>创建时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>100</td>
+            <td>2017.8.30 12.23</td>
+        </tr>
+
+        <tr>
+            <td>1</td>
+            <td>100</td>
+            <td>2017.8.30 12.23</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>100</td>
+            <td>2017.8.30 12.23</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>100</td>
+            <td>2017.8.30 12.23</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>100</td>
+            <td>2017.8.30 12.23</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>100</td>
+            <td>2017.8.30 12.23</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>100</td>
+            <td>2017.8.30 12.23</td>
+        </tr>
+        </tbody>
+
+    </table>
+    <ul class="am-pagination">
+        <li><a href="">上一页</a></li>
+        <li><span>5/100</span></li>
+        <li><a href="">下一页</a></li>
+    </ul>
+
+
 </div>
 
 <div class="widget am-cf" th:if="${device.type.name() == 'TYPE_VALUE'}">
     <div class="widget-head am-cf">
-        <div class="widget-title am-fl">TYPE_SWITCHER</div>
+        <div class="widget-title am-fl">数据预览</div>
     </div>
-    <button type="button" class="am-btn am-btn-secondary">次色按钮</button>
-    <button type="button" class="am-btn am-btn-success">绿色按钮</button>
+
+    <table class="am-table am-table-bordered am-table-striped am-table-compact">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>值</th>
+            <th>创建时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>100</td>
+            <td>2017.8.30 12.23</td>
+        </tr>
+
+        <tr>
+            <td>1</td>
+            <td>100</td>
+            <td>2017.8.30 12.23</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>100</td>
+            <td>2017.8.30 12.23</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>100</td>
+            <td>2017.8.30 12.23</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>100</td>
+            <td>2017.8.30 12.23</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>100</td>
+            <td>2017.8.30 12.23</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>100</td>
+            <td>2017.8.30 12.23</td>
+        </tr>
+        </tbody>
+
+    </table>
+    <ul class="am-pagination">
+        <li><a href="">上一页</a></li>
+        <li><span>5/100</span></li>
+        <li><a href="">下一页</a></li>
+    </ul>
+
 </div>
 
 

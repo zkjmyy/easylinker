@@ -44,6 +44,7 @@ public class AdminController {
 
     @RequestMapping("/index")
     public String index(Model model) {
+        AppUser appUser = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Map<String, Object> systemInfo = new HashMap<>();
         Properties props = System.getProperties();
         String osName = props.getProperty("os.name");
@@ -58,7 +59,7 @@ public class AdminController {
         systemInfo.put("totalMemory", totalMemory);
         systemInfo.put("freeMemory", freeMemory);
         systemInfo.put("alreadyUse", alreadyUse);
-        systemInfo.put("allDevice", deviceRepository.findAll().size());
+        systemInfo.put("deviceCount",deviceRepository.countByAppUser(appUser) );
         systemInfo.put("onlineDevice", deviceRepository.getOnlineDeviceCount());
         model.addAttribute("systemInfo", systemInfo);
         return "admin/index";

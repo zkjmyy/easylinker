@@ -17,6 +17,8 @@ public interface DeviceRepository extends JpaRepository<Device, String> {
 
     Device findByConnectionId(String connectionId);
 
+    Integer countByAppUser(AppUser appUser);
+
     @Query("select count(d.id) from Device  d where d.isOnline=1")
     int getOnlineDeviceCount();
 
