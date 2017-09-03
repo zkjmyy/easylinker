@@ -21,11 +21,11 @@ public class ActiveMQMessageProducer {
 
     @Autowired
     private JmsTemplate jmsTemplate;
-    //ActiveMQTopic activeMQTopic = new ActiveMQTopic("TEST");
-    //@Scheduled(fixedDelay = 3000)//每3s执行1次
-    // public void testSend() {
-    // this.jmsTemplate.convertAndSend(activeMQTopic, "测试消息");
-    //}
+//    ActiveMQTopic activeMQTopic = new ActiveMQTopic("DISCONNECTED");
+//    @Scheduled(fixedDelay = 3000)//每3s执行1次
+//     public void testSend() {
+//     this.jmsTemplate.convertAndSend(activeMQTopic, "测试消息");
+//    }
 
     public JSONObject pushMessage(String deviceId, DeviceType deviceType, String message) {
         this.jmsTemplate.convertAndSend(new ActiveMQTopic(deviceType.toString() + "." + deviceId), message);

@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 /**
@@ -22,6 +23,9 @@ public class AdviseConsumer {
     @Autowired
     DeviceRepository deviceRepository;
     Device device = null;
+
+    @Autowired
+    private JmsTemplate jmsTemplate;
 
     @JmsListener(destination = "ActiveMQ.Advisory.Connection.>")
     public void onConnection(ActiveMQMessage connectionMessage) throws Exception {
@@ -48,6 +52,8 @@ public class AdviseConsumer {
                 if (isLocalConnection) {
                     logger.info("Local device connected!");
                 } else {
+
+                    this.jmsTemplate.convertAndSend("DISCONNECTED", "text");
                     logger.warn("Illegal device want to connect without ID!");
                 }
             }

@@ -18,10 +18,13 @@ public class AuthBroker extends BrokerFilter {
     @Override
     public void send(ProducerBrokerExchange producerExchange, Message messageSend) throws Exception {
         ActiveMQTextMessage receivedMessage = (ActiveMQTextMessage) messageSend;
-        String message = receivedMessage.getText();
-        System.out.println("destnation:" + receivedMessage.getDestination());
-        System.out.println("message:" + receivedMessage.getText());
-        System.out.println(messageSend);
+        String dest=receivedMessage.getDestination().toString();
+        if (dest.equals("topic://DISCONNECTED")) {
+            removeConnection(getAdminConnectionContext(), receivedMessage.getConnection().getConnectionInfo(), new Exception("error"));
+            System.out.println("remove connection :"+receivedMessage.getProducerId());
+
+
+        }
 
 
     }
