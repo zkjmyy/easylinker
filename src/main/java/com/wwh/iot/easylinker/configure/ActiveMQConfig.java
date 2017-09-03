@@ -22,12 +22,18 @@ public class ActiveMQConfig {
      * @return
      */
     @Value("${spring.activemq.broker-url}")
-    String url;
+    String BROKER_URL;
+    @Value("${spring.activemq.user}")
+    String DEFAULT_USER;
+    @Value("${spring.activemq.password}")
+    String DEFAULT_PASSWORD;
 
     @Bean
     public ActiveMQConnectionFactory activeMQConnectionFactory() throws Exception {
-        ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory("admin", "password",
-                url);
+        ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory(
+                DEFAULT_USER,
+                DEFAULT_PASSWORD,
+                BROKER_URL);
         activeMQConnectionFactory.setTransportListener(addActiveMqTransportListener());
         activeMQConnectionFactory.setWatchTopicAdvisories(true);
         activeMQConnectionFactory.setExceptionListener(addActiveMQExceptionListener());

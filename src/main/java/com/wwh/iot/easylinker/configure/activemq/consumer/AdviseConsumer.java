@@ -21,23 +21,35 @@ public class AdviseConsumer {
     Logger logger = LoggerFactory.getLogger(AdviseConsumer.class);
     @Autowired
     DeviceRepository deviceRepository;
-    boolean isLegalDevice = false;//默认没有连接
+    Device device = null;
 
     @JmsListener(destination = "ActiveMQ.Advisory.Connection.>")
-    public void onConnectionMessage(ActiveMQMessage connectionMessage) throws Exception {
+    public void onConnection(ActiveMQMessage connectionMessage) throws Exception {
+        boolean isLegalDevice = false;//默认没有连接
+        boolean isLocalConnection = false;
         DataStructure dataStructure = connectionMessage.getDataStructure();
+        System.out.println(dataStructure);
+
         if (dataStructure instanceof ConnectionInfo) {
             String connectionId = ((ConnectionInfo) dataStructure).getConnectionId().toString();
-            String clientId = (((ConnectionInfo) dataStructure).getClientId());
-            Device device = null;
-            if (clientId != null && (device = deviceRepository.findOne(clientId)) != null) {
-                    device.setConnectionId(connectionId);
-                    device.setIsOnline(true);
-                    deviceRepository.save(device);
-                    isLegalDevice = true;
-                    logger.info("Device connected with id:" + connectionId);
+            String username = (((ConnectionInfo) dataStructure).getUserName());
+            String clientIp = ((ConnectionInfo) dataStructure).getClientIp().toString();
+            if (clientIp.startsWith("tcp://127.0.0.1")) {
+                isLocalConnection = true;
+            }
+
+            if ((username != null) && ((device = deviceRepository.findOne(username)) != null)) {
+                device.setConnectionId(connectionId);
+                device.setIsOnline(true);
+                deviceRepository.save(device);
+                isLegalDevice = true;
+                logger.info("Device [" + username + "] connected with connectionId:" + connectionId);
             } else {
-                logger.warn("Illegal device want to connect without ID!");
+                if (isLocalConnection) {
+                    logger.info("Local device connected!");
+                } else {
+                    logger.warn("Illegal device want to connect without ID!");
+                }
             }
 
         } else if (dataStructure instanceof RemoveInfo && isLegalDevice) {
@@ -46,12 +58,10 @@ public class AdviseConsumer {
             device.setIsOnline(false);
             deviceRepository.save(device);
             logger.info("Device disconnected with connection-id:" + objectId);
-        } else {
-            logger.warn("Illegal device disconnect without ID!");
+        }else {
+            logger.warn("设备断开!");
         }
 
-
     }
-
 
 }
