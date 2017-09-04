@@ -32,7 +32,7 @@ public class AdviseConsumer {
         boolean isLegalDevice = false;//默认没有连接
         boolean isLocalConnection = false;
         DataStructure dataStructure = connectionMessage.getDataStructure();
-        System.out.println(dataStructure);
+        System.out.println("dataStructure-->"+dataStructure);
 
         if (dataStructure instanceof ConnectionInfo) {
             String connectionId = ((ConnectionInfo) dataStructure).getConnectionId().toString();
@@ -53,7 +53,7 @@ public class AdviseConsumer {
                     logger.info("Local device connected!");
                 } else {
 
-                    this.jmsTemplate.convertAndSend("DISCONNECTED", "text");
+                    this.jmsTemplate.convertAndSend("DISCONNECTED", connectionId);
                     logger.warn("Illegal device want to connect without ID!");
                 }
             }
@@ -65,7 +65,12 @@ public class AdviseConsumer {
             deviceRepository.save(device);
             logger.info("Device disconnected with connection-id:" + objectId);
         }else {
-            logger.warn("设备断开!");
+            if (isLegalDevice){
+                logger.warn("合法设备断开!");
+            }else {
+                logger.warn("不合法设备断开!");
+            }
+
         }
 
     }
